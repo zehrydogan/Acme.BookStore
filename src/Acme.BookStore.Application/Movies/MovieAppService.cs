@@ -24,9 +24,4 @@ public class MovieAppService :
         UpdatePolicyName = Permissions.BookStorePermissions.Movies.Edit;
         DeletePolicyName = Permissions.BookStorePermissions.Movies.Delete;
     }
-
-    public Task<ListResultDto<AuthorLookupDto>> GetAuthorLookupAsync()
-    {
-        throw new NotImplementedException();
-    }
 }

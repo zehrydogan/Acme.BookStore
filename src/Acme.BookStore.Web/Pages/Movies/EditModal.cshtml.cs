@@ -31,10 +31,6 @@ public class EditModalModel : BookStorePageModel
         var movieDto = await _movieAppService.GetAsync(id);
         Movie = ObjectMapper.Map<MovieDto, EditMovieViewModel>(movieDto);
 
-        var authorLookup = await _movieAppService.GetAuthorLookupAsync();
-        Authors = authorLookup.Items
-            .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
-            .ToList();
     }
 
     public async Task<IActionResult> OnPostAsync()

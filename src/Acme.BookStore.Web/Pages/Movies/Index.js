@@ -46,24 +46,12 @@ $(function () {
                     title: l('Name'),
                     data: "name"
                 },
-
-                // ADDED the NEW AUTHOR NAME COLUMN
-                {
-                    title: l('Author'),
-                    data: "authorName"
-                },
-
                 {
                     title: l('Type'),
                     data: "type",
                     render: function (data) {
                         return l('Enum:MovieType.' + data);
                     }
-                },
-                {
-                    title: l('PublishDate'),
-                    data: "publishDate",
-                    dataFormat: "datetime"
                 },
                 {
                     title: l('Price'),
