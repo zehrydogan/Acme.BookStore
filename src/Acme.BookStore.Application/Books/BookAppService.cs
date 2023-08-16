@@ -38,6 +38,10 @@ public class BookAppService :
         DeletePolicyName = BookStorePermissions.Books.Delete;
     }
 
+
+
+
+
     public override async Task<BookDto> GetAsync(Guid id)
     {
         //Get the IQueryable<Book> from the repository

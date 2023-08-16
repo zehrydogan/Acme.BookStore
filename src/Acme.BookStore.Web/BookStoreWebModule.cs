@@ -104,6 +104,9 @@ public class BookStoreWebModule : AbpModule
             options.Conventions.AuthorizePage("/Books/Index", BookStorePermissions.Books.Default);
             options.Conventions.AuthorizePage("/Books/CreateModal", BookStorePermissions.Books.Create);
             options.Conventions.AuthorizePage("/Books/EditModal", BookStorePermissions.Books.Edit);
+            options.Conventions.AuthorizePage("/Movies/Index", BookStorePermissions.Movies.Default);
+            options.Conventions.AuthorizePage("/Movies/CreateModal", BookStorePermissions.Movies.Create);
+            options.Conventions.AuthorizePage("/Movies/EditModal", BookStorePermissions.Movies.Edit);
         });
     }
 

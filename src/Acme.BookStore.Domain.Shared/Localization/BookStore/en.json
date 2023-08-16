@@ -43,7 +43,29 @@
     "Authors": "Authors",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
-    "NewAuthor": "New author"
+    "NewAuthor": "New author",
+    "Menu:MovieStore": "Movie Store",
+    "Menu:Movies": "Movies",
+    "IMDBRatings": "IMDB Ratings",
+    "NewMovie": "New movie",
+    "Enum:MovieType.0": "Action",
+    "Enum:MovieType.1": "Adventure",
+    "Enum:MovieType.2": "Comedy",
+    "Enum:MovieType.3": "Drama",
+    "Enum:MovieType.4": "Fantasy",
+    "Enum:MovieType.5": "Horror",
+    "Enum:MovieType.6": "Musicals",
+    "Enum:MovieType.7": "Mystery",
+    "Enum:MovieType.8": "Romance",
+    "Enum:MovieType.9": "Science Fiction",
+    "Enum:MovieType.10": "Sports",
+    "Enum:MovieType.11": "Thriller",
+    "MovieDeletionConfirmationMessage": "Are you sure to delete the movie '{0}'?",
+    "Permission:Movies": "Movie Management",
+    "Permission:Movie.Create": "Creating new movies",
+    "Permission:Movies.Edit": "Editing the movies",
+    "Permission:Movies.Delete": "Deleting the movies"
+
 
 
 

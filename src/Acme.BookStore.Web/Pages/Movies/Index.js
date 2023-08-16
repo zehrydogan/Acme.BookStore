@@ -1,0 +1,193 @@
+//$(function () {
+//    var l = abp.localization.getResource('BookStore');
+//    var createModal = new abp.ModalManager(abp.appPath + 'Movie/CreateModal');
+//    var editModal = new abp.ModalManager(abp.appPath + 'Movie/EditModal');
+
+//    var dataTable = $('#MoviesTable').DataTable(
+//        abp.libs.datatables.normalizeConfiguration({
+//            serverSide: true,
+//            paging: true,
+//            order: [[1, "asc"]],
+//            searching: false,
+//            scrollX: true,
+//            ajax: abp.libs.datatables.createAjax(acme.bookStore.movies.movie.getList),
+//            columnDefs: [
+//                {
+//                    title: l('Actions'),
+//                    rowAction: {
+//                        items:
+//                            [
+//                                {
+//                                    text: l('Edit'),
+//                                    action: function (data) {
+//                                        editModal.open({ id: data.record.id });
+//                                    }
+//                                },
+//                                {
+//                                    text: l('Delete'),
+//                                    confirmMessage: function (data) {
+//                                        return l('MovieDeletionConfirmationMessage', data.record.name);
+//                                    },
+//                                    action: function (data) {
+//                                        acme.bookStore.movies.movie
+//                                            .delete(data.record.id)
+//                                            .then(function () {
+//                                                abp.notify.info(l('SuccessfullyDeleted'));
+//                                                dataTable.ajax.reload();
+//                                            });
+//                                    }
+//                                }
+//                            ]
+//                    }
+//                },
+//                {
+//                    title: l('Name'),
+//                    data: "name"
+//                },
+//                {
+//                    title: l('Type'),
+//                    data: "type",
+//                    render: function (data) {
+//                        return l('Enum:MovieType.' + data);
+//                    }
+//                },
+//                //{
+//                //    title: l('PublishDate'),
+//                //    data: "publishDate",
+//                //    render: function (data) {
+//                //        return luxon
+//                //            .DateTime
+//                //            .fromISO(data, {
+//                //                locale: abp.localization.currentCulture.name
+//                //            }).toLocaleString();
+//                //    }
+//                //},
+//                {
+//                    title: l('Price'),
+//                    data: "price"
+//                },
+//                {
+//                    title: l('CreationTime'), data: "creationTime",
+//                    render: function (data) {
+//                        return luxon
+//                            .DateTime
+//                            .fromISO(data, {
+//                                locale: abp.localization.currentCulture.name
+//                            }).toLocaleString(luxon.DateTime.DATETIME_SHORT);
+//                    }
+//                }
+//            ]
+//        })
+//    );
+
+//    createModal.onResult(function () {
+//        dataTable.ajax.reload();
+//    });
+
+//    editModal.onResult(function () {
+//        dataTable.ajax.reload();
+//    });
+
+//    $('#NewMovieButton').click(function (e) {
+//        e.preventDefault();
+//        createModal.open();
+//    });
+//});
+
+
+
+
+
+$(function () {
+    var l = abp.localization.getResource('BookStore');
+    var createModal = new abp.ModalManager(abp.appPath + 'Movies/CreateModal');
+    var editModal = new abp.ModalManager(abp.appPath + 'Movies/EditModal');
+
+    var dataTable = $('#MoviesTable').DataTable(
+        abp.libs.datatables.normalizeConfiguration({
+            serverSide: true,
+            paging: true,
+            order: [[1, "asc"]],
+            searching: false,
+            scrollX: true,
+            ajax: abp.libs.datatables.createAjax(acme.bookStore.movies.movie.getList),
+            columnDefs: [
+                {
+                    title: l('Actions'),
+                    rowAction: {
+                        items:
+                            [
+                                {
+                                    text: l('Edit'),
+                                    visible: abp.auth.isGranted('BookStore.Movies.Edit'),
+                                    action: function (data) {
+                                        editModal.open({ id: data.record.id });
+                                    }
+                                },
+                                {
+                                    text: l('Delete'),
+                                    visible: abp.auth.isGranted('BookStore.Movies.Delete'),
+                                    confirmMessage: function (data) {
+                                        return l('MovieDeletionConfirmationMessage', data.record.name);
+                                    },
+                                    action: function (data) {
+                                        acme.bookStore.movies.movie
+                                            .delete(data.record.id)
+                                            .then(function () {
+                                                abp.notify.info(l('SuccessfullyDeleted'));
+                                                dataTable.ajax.reload();
+                                            });
+                                    }
+                                }
+                            ]
+                    }
+                },
+                {
+                    title: l('Name'),
+                    data: "name"
+                },
+
+                // ADDED the NEW AUTHOR NAME COLUMN
+                {
+                    title: l('Author'),
+                    data: "authorName"
+                },
+
+                {
+                    title: l('Type'),
+                    data: "type",
+                    render: function (data) {
+                        return l('Enum:MovieType.' + data);
+                    }
+                },
+                {
+                    title: l('PublishDate'),
+                    data: "publishDate",
+                    dataFormat: "datetime"
+                },
+                {
+                    title: l('Price'),
+                    data: "price"
+                },
+                {
+                    title: l('CreationTime'), data: "creationTime",
+                    dataFormat: "datetime"
+                }
+
+            ]
+        })
+    );
+
+    createModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    editModal.onResult(function () {
+        dataTable.ajax.reload();
+    });
+
+    $('#NewMovieButton').click(function (e) {
+        e.preventDefault();
+        createModal.open();
+    });
+});

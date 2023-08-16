@@ -47,9 +47,10 @@ public class EditModalModel : BookStorePageModel
 
         [Required]
         [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
         [TextArea]
+        [Required]
         public string ShortBio { get; set; }
     }
 }
