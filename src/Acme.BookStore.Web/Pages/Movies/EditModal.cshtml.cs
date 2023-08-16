@@ -48,9 +48,7 @@ public class EditModalModel : BookStorePageModel
         [HiddenInput]
         public Guid Id { get; set; }
 
-        [SelectItems(nameof(Authors))]
-        [DisplayName("Author")]
-        public Guid AuthorId { get; set; }
+      
 
         [Required]
         [StringLength(128)]
@@ -62,6 +60,6 @@ public class EditModalModel : BookStorePageModel
         [Required]
         public float IMDBRatings { get; set; } 
         [Required]
-        public float Price { get; set; }
+        public string DirectorName { get; set; }
     }
 }
