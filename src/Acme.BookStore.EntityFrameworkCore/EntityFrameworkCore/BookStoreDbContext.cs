@@ -1,4 +1,5 @@
 ﻿using Acme.BookStore.Authors;
+using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 
@@ -102,7 +103,6 @@ public class BookStoreDbContext :
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
             // ADD THE MAPPING FOR THE RELATION
-            b.HasOne<Author>().WithMany().HasForeignKey(x => x.DirectorId).IsRequired();
         });
 
         builder.Entity<Author>(b =>

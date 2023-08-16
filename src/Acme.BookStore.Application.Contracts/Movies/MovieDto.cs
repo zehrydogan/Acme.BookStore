@@ -15,7 +15,6 @@ namespace Acme.BookStore.Movies
 
         public float IMDBRatings { get; set; }
 
-        public Guid DirectorId { get; set; }
 
     }
 }

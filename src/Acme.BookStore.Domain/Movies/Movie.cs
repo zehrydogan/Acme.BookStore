@@ -13,6 +13,5 @@ public class Movie : AuditedAggregateRoot<Guid>
 
     public float IMDBRatings { get; set; }
 
-    public Guid DirectorId { get; set; }
 
 }
