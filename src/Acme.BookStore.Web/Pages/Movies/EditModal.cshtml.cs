@@ -48,8 +48,6 @@ public class EditModalModel : BookStorePageModel
         [HiddenInput]
         public Guid Id { get; set; }
 
-      
-
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
@@ -59,7 +57,7 @@ public class EditModalModel : BookStorePageModel
 
         [Required]
         public float IMDBRatings { get; set; } 
-        [Required]
+      [Required]
         public string DirectorName { get; set; }
     }
 }

@@ -55,6 +55,6 @@ public class CreateModalModel : BookStorePageModel
         public float IMDBRatings { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public string DirectorName { get; set; }
     }
 }

@@ -98,7 +98,7 @@ public class BookStoreDbContext :
         });
         builder.Entity<Movie>(b =>
         {
-            b.ToTable(BookStoreConsts.DbTablePrefix + "Movies", MovieStoreConsts.DbSchema);
+            b.ToTable(MovieStoreConsts.DbTablePrefix + "Movies", MovieStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 

@@ -16,7 +16,7 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         CreateMap<Author, Books.AuthorLookupDto>();
         CreateMap<Movie, MovieDto>();
         CreateMap<CreateUpdateMovieDto, Movie>();
-        CreateMap<Author, Movies.AuthorLookupDto>();
+        //CreateMap<Author, Movies.AuthorLookupDto>();
 
 
 

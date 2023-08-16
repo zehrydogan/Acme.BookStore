@@ -53,10 +53,7 @@ $(function () {
                         return l('Enum:MovieType.' + data);
                     }
                 },
-                {
-                    title: l('Price'),
-                    data: "price"
-                },
+               
                 {
                     title: l('CreationTime'), data: "creationTime",
                     dataFormat: "datetime"
