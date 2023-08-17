@@ -13,33 +13,32 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(acme.bookStore.movies.movie.getList),
             columnDefs: [
                 {
-                    title: l('Actions'),
+                    title: l('ACTIONS'),
                     rowAction: {
-                        items:
-                            [
-                                {
-                                    text: l('Edit'),
-                                    visible: abp.auth.isGranted('BookStore.Movies.Edit'),
-                                    action: function (data) {
-                                        editModal.open({ id: data.record.id });
-                                    }
-                                },
-                                {
-                                    text: l('Delete'),
-                                    visible: abp.auth.isGranted('BookStore.Movies.Delete'),
-                                    confirmMessage: function (data) {
-                                        return l('MovieDeletionConfirmationMessage', data.record.name);
-                                    },
-                                    action: function (data) {
-                                        acme.bookStore.movies.movie
-                                            .delete(data.record.id)
-                                            .then(function () {
-                                                abp.notify.info(l('SuccessfullyDeleted'));
-                                                dataTable.ajax.reload();
-                                            });
-                                    }
+                        items: [
+                            {
+                                text: l('Edit'),
+                                visible: abp.auth.isGranted('BookStore.Movies.Edit'),
+                                action: function (data) {
+                                    editModal.open({ id: data.record.id });
                                 }
-                            ]
+                            },
+                            {
+                                text: l('Delete'),
+                                visible: abp.auth.isGranted('BookStore.Movies.Delete'),
+                                confirmMessage: function (data) {
+                                    return l('MovieDeletionConfirmationMessage', data.record.name);
+                                },
+                                action: function (data) {
+                                    acme.bookStore.movies.movie
+                                        .delete(data.record.id)
+                                        .then(function () {
+                                            abp.notify.info(l('SuccessfullyDeleted'));
+                                            dataTable.ajax.reload();
+                                        });
+                                }
+                            }
+                        ]
                     }
                 },
                 {
@@ -53,12 +52,18 @@ $(function () {
                         return l('Enum:MovieType.' + data);
                     }
                 },
-               
                 {
-                    title: l('CreationTime'), data: "creationTime",
-                    dataFormat: "datetime"
+                    title: l('DIRECTOR'),
+                    data: "director"
+                },
+                {
+                    title: l('IMDB RATINGS'),
+                    data: "imdbRatings",
+                    render: function (data) {
+                        return (parseFloat(data) / 10).toFixed(1);
+                 
+                    }
                 }
-
             ]
         })
     );

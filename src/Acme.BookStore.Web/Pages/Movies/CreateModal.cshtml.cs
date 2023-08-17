@@ -34,13 +34,13 @@ public class CreateModalModel : BookStorePageModel
 
     public class CreateMovieViewModel
     {
-      
+
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
 
         [Required]
-        public MovieType Type { get; set; } 
+        public MovieType Type { get; set; }
 
         [Required]
         public float IMDBRatings { get; set; }
