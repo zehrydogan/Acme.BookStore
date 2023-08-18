@@ -16,7 +16,7 @@ public class BookStoreWebAutoMapperProfile : Profile
         CreateMap<MovieDto, CreateUpdateMovieDto>();
 
 
-        CreateMap<Pages.Authors.CreateModalModel.CreateAuthorViewModel, CreateAuthorDto>();
+        CreateMap<Pages.Authors.CreateModalModel.CreateAuthorViewModel, CreateUpdateAuthorDto>();
         CreateMap<AuthorDto, Pages.Authors.EditModalModel.EditAuthorViewModel>();
         CreateMap<Pages.Authors.EditModalModel.EditAuthorViewModel,  UpdateAuthorDto>();
 

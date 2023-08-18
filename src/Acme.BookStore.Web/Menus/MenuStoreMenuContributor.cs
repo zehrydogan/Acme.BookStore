@@ -11,7 +11,7 @@ using Volo.Abp.UI.Navigation;
 
 namespace Acme.BookStore.Web.Menus;
 
-public class BookStoreMenuContributor : IMenuContributor
+public class MenuStoreMenuContributor : IMenuContributor
 {
     public async Task ConfigureMenuAsync(MenuConfigurationContext context)
     {
@@ -29,13 +29,13 @@ public class BookStoreMenuContributor : IMenuContributor
         context.Menu.Items.Insert(
             0,
             new ApplicationMenuItem(
-                BookStoreMenus.Home,
+                MenuStoreMenus.Home,
                 l["Menu:Home"],
                 "~/",
                 icon: "fas fa-home",
                 order: 0
-            )
-        );
+
+        ));
 
         if (MultiTenancyConsts.IsEnabled)
         {
@@ -50,52 +50,40 @@ public class BookStoreMenuContributor : IMenuContributor
         administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
         context.Menu.AddItem(
      new ApplicationMenuItem(
-         "BooksStore",
-         l["Menu:BookStore"],
-         icon: "fa fa-book"
+         "MoviesStore",
+         l["Menu:MovieStore"],
+         icon: "fa fa-Movie"
      ).AddItem(
          new ApplicationMenuItem(
-             "BooksStore.Books",
-             l["Menu:Books"],
-             url: "/Books"
-         ).RequirePermissions(BookStorePermissions.Books.Default)
-     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
+             "MoviesStore.Movies",
+             l["Menu:Movies"],
+             url: "/Movies"
+         ).RequirePermissions(BookStorePermissions.Movies.Default)
+     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "Movie STORE" MENU
          new ApplicationMenuItem(
-             "BooksStore.Authors",
+             "MoviesStore.Authors",
              l["Authors"],
              url: "/Authors"
          ).RequirePermissions(BookStorePermissions.Authors.Default)
-     )
+     //)
 
- //.AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
- //    new ApplicationMenuItem(
- //        "BooksStore.Authors",
- //        l["Authors"],
- //        url: "/Authors"
- //    ).RequirePermissions(BookStorePermissions.Authors.Default)
- //)
+     //.AddItem(
+     //    new ApplicationMenuItem(
+     //        "BooksStore.Movies",
+     //        l["Movies"],
+     //        url: "/Movies"
+     //    ).RequirePermissions(BookStorePermissions.Movies.Default)
 
+    //.AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
+    //    new ApplicationMenuItem(
+    //        "BooksStore.Authors",
+    //        l["Authors"],
+    //        url: "/Authors"
+    //    ).RequirePermissions(BookStorePermissions.Authors.Default)
+    //)
+
+    )
  );
-
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-         "MoviesStore",
-         l["Movie Store"],
-         icon: "fa fa-book"
-     )
-     .AddItem(
-         new ApplicationMenuItem(
-             "MoviesStore.Movies",
-             l["Movies"],
-             url: "/Movies"
-         ).RequirePermissions(BookStorePermissions.Movies.Default)
-     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
-         new ApplicationMenuItem(
-             "MoviesStore.Actors",
-             l["Actors"],
-             url: "/Actors"
-         ).RequirePermissions(BookStorePermissions.Actors.Default)
-     ));
 
         return Task.CompletedTask;
     }

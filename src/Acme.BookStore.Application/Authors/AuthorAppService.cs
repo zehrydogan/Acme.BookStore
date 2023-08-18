@@ -52,7 +52,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
         );
     }
     [Authorize(BookStorePermissions.Authors.Create)]
-    public async Task<AuthorDto> CreateAsync(CreateAuthorDto input)
+    public async Task<AuthorDto> CreateAsync(CreateUpdateAuthorDto input)
     {
         var author = await _authorManager.CreateAsync(
             input.Name,

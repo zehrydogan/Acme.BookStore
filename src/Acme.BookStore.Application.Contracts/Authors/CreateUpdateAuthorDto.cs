@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Acme.BookStore.Authors;
 
-public class CreateAuthorDto
+public class CreateUpdateAuthorDto
 {
     [Required]
     [StringLength(AuthorConsts.MaxNameLength)]

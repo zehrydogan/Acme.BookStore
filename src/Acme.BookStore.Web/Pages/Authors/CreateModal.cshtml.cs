@@ -26,7 +26,7 @@ public class CreateModalModel : BookStorePageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var dto = ObjectMapper.Map<CreateAuthorViewModel, CreateAuthorDto>(Author);
+        var dto = ObjectMapper.Map<CreateAuthorViewModel, CreateUpdateAuthorDto>(Author);
         await _authorAppService.CreateAsync(dto);
         return NoContent();
     }

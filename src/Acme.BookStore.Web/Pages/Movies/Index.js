@@ -59,7 +59,7 @@ $(function () {
                 {
                     title: l('IMDB RATINGS'),
                     data: "imdbRatings",
-                    render: function (data) {
+                    render: function (data) {  // Veri kullanýlarak bir HTML çýktýsý oluþturulur
                         return (parseFloat(data) / 10).toFixed(1);
                  
                     }

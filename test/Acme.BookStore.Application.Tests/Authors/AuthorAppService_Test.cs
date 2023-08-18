@@ -40,7 +40,7 @@ public class AuthorAppService_Tests : BookStoreApplicationTestBase
     public async Task Should_Create_A_New_Author()
     {
         var authorDto = await _authorAppService.CreateAsync(
-            new CreateAuthorDto
+            new CreateUpdateAuthorDto
             {
                 Name = "Edward Bellamy",
                 BirthDate = new DateTime(1850, 05, 22),
@@ -58,7 +58,7 @@ public class AuthorAppService_Tests : BookStoreApplicationTestBase
         await Assert.ThrowsAsync<AuthorAlreadyExistsException>(async () =>
         {
             await _authorAppService.CreateAsync(
-                new CreateAuthorDto
+                new CreateUpdateAuthorDto
                 {
                     Name = "Douglas Adams",
                     BirthDate = DateTime.Now,

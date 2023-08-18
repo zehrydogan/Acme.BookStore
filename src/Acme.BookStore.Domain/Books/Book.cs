@@ -15,4 +15,3 @@ public class Book : AuditedAggregateRoot<Guid>
     public Guid AuthorId { get; set; }
 
 }
-

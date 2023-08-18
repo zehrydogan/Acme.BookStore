@@ -2,6 +2,7 @@
 using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
+using Acme.BookStore.Actors;
 
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -57,6 +58,9 @@ public class BookStoreDbContext :
     public DbSet<IdentityLinkUser> LinkUsers { get; set; }
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
     public DbSet<Author> Authors { get; set; }
+    public DbSet<Actor> Actors { get; set; }
+
+
 
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
@@ -95,14 +99,7 @@ public class BookStoreDbContext :
 
             // ADD THE MAPPING FOR THE RELATION
             b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
-        });
-        builder.Entity<Movie>(b =>
-        {
-            b.ToTable(MovieStoreConsts.DbTablePrefix + "Movies", MovieStoreConsts.DbSchema);
-            b.ConfigureByConvention(); //auto configure for the base class props
-            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
-            // ADD THE MAPPING FOR THE RELATION
         });
 
         builder.Entity<Author>(b =>
@@ -117,7 +114,30 @@ public class BookStoreDbContext :
                 .HasMaxLength(AuthorConsts.MaxNameLength);
 
             b.HasIndex(x => x.Name);
+
         });
 
-    }
-}
+        builder.Entity<Movie>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "Movies", BookStoreConsts.DbSchema);
+            b.ConfigureByConvention(); //auto configure for the base class props
+            b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+
+            // ADD THE MAPPING FOR THE RELATION
+            b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
+        });
+
+        builder.Entity<Actor>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "Actors",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(ActorConsts.MaxNameLength);
+
+            b.HasIndex(x => x.Name);
+        });
+    } };
