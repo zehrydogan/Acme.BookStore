@@ -13,35 +13,28 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(acme.bookStore.actors.actor.getList),
             columnDefs: [
                 {
-                    title: l('Actions'),
+                    title: l('ACTIONS'),
                     rowAction: {
                         items:
                             [
                                 {
                                     text: l('Edit'),
-                                    visible:
-                                        abp.auth.isGranted('BookStore.Actors.Edit'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
                                 },
                                 {
                                     text: l('Delete'),
-                                    visible:
-                                        abp.auth.isGranted('BookStore.Actors.Delete'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Delete'),
                                     confirmMessage: function (data) {
-                                        return l(
-                                            'ActorDeletionConfirmationMessage',
-                                            data.record.name
-                                        );
+                                        return l('BookDeletionConfirmationMessage', data.record.name);
                                     },
                                     action: function (data) {
-                                        acme.bookStore.actors.actor
+                                        acme.bookStore.books.book
                                             .delete(data.record.id)
                                             .then(function () {
-                                                abp.notify.info(
-                                                    l('SuccessfullyDeleted')
-                                                );
+                                                abp.notify.info(l('SuccessfullyDeleted'));
                                                 dataTable.ajax.reload();
                                             });
                                     }
@@ -55,17 +48,33 @@ $(function () {
                 },
                 {
                     title: l('Gender'),
-                    data: "gender"
+                    data: "gender",
+                    render: function (data) {
+                        return l(data);
+                    }
                 },
                 {
-                    title: l('BirthDate'),
+                    title: l('BIRTH DATE'),
                     data: "birthDate",
                     render: function (data) {
-                        return luxon
-                            .DateTime
-                            .fromISO(data, {
-                                locale: abp.localization.currentCulture.name
-                            }).toLocaleString();
+                        return luxon.DateTime.fromISO(data, {
+                            locale: abp.localization.currentCulture.name
+                        }).toLocaleString();
+                    }
+                },
+                {
+                    title: l('Age'),
+                    data: "birthDate",
+                    render: function (data) {
+                        const birthDate = luxon.DateTime.fromISO(data, {
+                            locale: abp.localization.currentCulture.name
+                        });
+                        const today = luxon.DateTime.now();
+                        const age = today.year - birthDate.year - (
+                            (today.month < birthDate.month ||
+                                (today.month === birthDate.month && today.day < birthDate.day)) ? 1 : 0
+                        );
+                        return age;
                     }
                 }
             ]

@@ -13,7 +13,7 @@ public interface IAuthorAppService : IApplicationService
 
     Task<AuthorDto> CreateAsync(CreateUpdateAuthorDto input);
 
-    Task UpdateAsync(Guid id, UpdateAuthorDto input);
+    Task UpdateAsync(Guid id, CreateUpdateAuthorDto input);
 
     Task DeleteAsync(Guid id);
 }

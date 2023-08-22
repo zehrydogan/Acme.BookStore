@@ -1,4 +1,4 @@
-﻿@*@page
+﻿@page
 @using Acme.BookStore.Localization
 @using Acme.BookStore.Web.Pages.Actors
 @using Microsoft.Extensions.Localization
@@ -8,15 +8,12 @@
 @{
     Layout = null;
 }
-<form asp-page="/Actors/CreateModal">
+<abp-dynamic-form abp-model="Actor" asp-page="/Actors/CreateModal">
     <abp-modal>
-        <abp-modal-header title="@L["NewActor"].Value"></abp-modal-header>
+        <abp-modal-header title="@L["New Actor"].Value"></abp-modal-header>
         <abp-modal-body>
-            <abp-input asp-for="Actor.Name" />
-            <abp-input asp-for="Actor.BirthDate" />
-            <abp-input asp-for="Actor.ShortBio" />
+            <abp-form-content />
         </abp-modal-body>
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
     </abp-modal>
-</form>
-*@
+</abp-dynamic-form>

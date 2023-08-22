@@ -1,6 +1,6 @@
 ﻿using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
-using Acme.BookStore.Authors;
+using Acme.BookStore.Actors;
 using Acme.BookStore.Movies;
 
 using AutoMapper;
@@ -14,11 +14,14 @@ public class BookStoreWebAutoMapperProfile : Profile
     {
         CreateMap<BookDto, CreateUpdateBookDto>();
         CreateMap<MovieDto, CreateUpdateMovieDto>();
+        CreateMap<ActorDto, CreateUpdateActorDto>();
+        CreateMap<AuthorDto, CreateUpdateAuthorDto>();
+
 
 
         CreateMap<Pages.Authors.CreateModalModel.CreateAuthorViewModel, CreateUpdateAuthorDto>();
         CreateMap<AuthorDto, Pages.Authors.EditModalModel.EditAuthorViewModel>();
-        CreateMap<Pages.Authors.EditModalModel.EditAuthorViewModel,  UpdateAuthorDto>();
+        CreateMap<Pages.Authors.EditModalModel.EditAuthorViewModel, CreateUpdateAuthorDto>();
 
         CreateMap<Pages.Books.CreateModalModel.CreateBookViewModel, CreateUpdateBookDto>();
         CreateMap<BookDto, Pages.Books.EditModalModel.EditBookViewModel>();
@@ -28,7 +31,10 @@ public class BookStoreWebAutoMapperProfile : Profile
         CreateMap<MovieDto, Pages.Movies.EditModalModel.EditMovieViewModel>();
         CreateMap<Pages.Movies.EditModalModel.EditMovieViewModel, CreateUpdateMovieDto>();
 
+        CreateMap<Pages.Actors.CreateModalModel.CreateActorViewModel, CreateUpdateActorDto>();
+        CreateMap<ActorDto, Pages.Actors.EditModalModel.EditActorViewModel>();
+        CreateMap<Pages.Actors.EditModalModel.EditActorViewModel, CreateUpdateActorDto>();
+
 
     }
 }
-

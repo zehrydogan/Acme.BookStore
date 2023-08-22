@@ -1,19 +1,22 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.Movies;
+using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
 
 namespace Acme.BookStore.Web.Pages.Movies;
-
 public class EditModalModel : BookStorePageModel
 {
     [BindProperty]
     public EditMovieViewModel Movie { get; set; }
 
-    public List<SelectListItem> Authors { get; set; }
+    public List<SelectListItem> Actors { get; set; }
 
     private readonly IMovieAppService _movieAppService;
 
@@ -27,7 +30,12 @@ public class EditModalModel : BookStorePageModel
         var movieDto = await _movieAppService.GetAsync(id);
         Movie = ObjectMapper.Map<MovieDto, EditMovieViewModel>(movieDto);
 
+        var actorLookup = await _movieAppService.GetActorLookupAsync();
+        Actors = actorLookup.Items
+            .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
+            .ToList();
     }
+
 
     public async Task<IActionResult> OnPostAsync()
     {
@@ -43,6 +51,10 @@ public class EditModalModel : BookStorePageModel
     {
         [HiddenInput]
         public Guid Id { get; set; }
+
+        [SelectItems(nameof(Actors))]
+        [DisplayName("Actor")]
+        public Guid ActorId { get; set; }
 
         [Required]
         [StringLength(128)]

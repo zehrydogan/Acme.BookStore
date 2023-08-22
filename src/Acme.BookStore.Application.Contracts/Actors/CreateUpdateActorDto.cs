@@ -10,7 +10,9 @@ public class CreateUpdateActorDto
     public string Name { get; set; }
 
     [Required]
+    public GenderType Gender { get; set; }
+
+    [Required]
     public DateTime BirthDate { get; set; }
 
-    public string ShortBio { get; set; }
 }

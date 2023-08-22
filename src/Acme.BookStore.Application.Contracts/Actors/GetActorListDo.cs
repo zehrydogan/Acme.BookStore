@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Volo.Abp.Application.Dtos;
 
-namespace Acme.BookStore.Actors
+namespace Acme.BookStore.Actors;
+
+public class GetActorListDto : PagedAndSortedResultRequestDto
 {
-    internal class GetActorListDo
-    {
-    }
+    public string? Filter { get; set; }
 }

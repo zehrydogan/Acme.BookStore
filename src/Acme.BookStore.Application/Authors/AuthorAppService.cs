@@ -65,7 +65,7 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
         return ObjectMapper.Map<Author, AuthorDto>(author);
     }
     [Authorize(BookStorePermissions.Authors.Edit)]
-    public async Task UpdateAsync(Guid id, UpdateAuthorDto input)
+    public async Task UpdateAsync(Guid id, CreateUpdateAuthorDto input)
     {
         var author = await _authorRepository.GetAsync(id);
 

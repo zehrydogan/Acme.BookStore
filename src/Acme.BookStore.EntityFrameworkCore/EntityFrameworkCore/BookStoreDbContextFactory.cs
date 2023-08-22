@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Acme.BookStore.Authors;
+using Acme.BookStore.Movies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

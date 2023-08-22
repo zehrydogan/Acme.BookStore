@@ -10,9 +10,11 @@ public class Actor : FullAuditedAggregateRoot<Guid>
 {
     public string Name { get; private set; }
 
-    public string Gender { get; private set; }
+    public GenderType Gender { get; private set; }
 
     public DateTime BirthDate { get; set; }
+
+
 
     private Actor()
     {
@@ -22,14 +24,16 @@ public class Actor : FullAuditedAggregateRoot<Guid>
     internal Actor(
         Guid id,
         [NotNull] string name,
-        [NotNull] string gender,
+        [NotNull] DateTime birthDate,
+        [NotNull] GenderType gender 
 
+        )
 
-        [NotNull] DateTime birthDate)
         : base(id)
     {
         SetName(name);
         BirthDate = birthDate;
+        Gender = gender;
         
     }
 

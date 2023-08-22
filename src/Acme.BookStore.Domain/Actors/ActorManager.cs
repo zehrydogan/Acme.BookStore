@@ -17,9 +17,12 @@ public class ActorManager : DomainService
 
     public async Task<Actor> CreateAsync(
         [NotNull] string name,
-        [NotNull] string gender,
 
-        DateTime birthDate)
+        DateTime birthDate,
+        [NotNull] GenderType gender
+)
+
+
     {
         Check.NotNullOrWhiteSpace(name, nameof(name));
 
@@ -32,8 +35,8 @@ public class ActorManager : DomainService
         return new Actor(
             GuidGenerator.Create(),
             name,
-            gender,
-            birthDate
+            birthDate,
+            gender
             
         );
     }

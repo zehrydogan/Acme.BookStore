@@ -4,8 +4,7 @@ using Volo.Abp.Application.Dtos;
 namespace Acme.BookStore.Movies;
 
 
-public class AuthorLookupDto : EntityDto<Guid>
+public class ActorLookupDto : EntityDto<Guid>
 {
     public string Name { get; set; }
 }
-

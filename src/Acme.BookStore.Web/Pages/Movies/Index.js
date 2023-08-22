@@ -46,6 +46,10 @@ $(function () {
                     data: "name"
                 },
                 {
+                    title: l('Actor'),
+                    data: "actorName"
+                },
+                {
                     title: l('Type'),
                     data: "type",
                     render: function (data) {

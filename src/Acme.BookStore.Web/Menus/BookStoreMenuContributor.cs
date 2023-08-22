@@ -67,13 +67,6 @@ public class BookStoreMenuContributor : IMenuContributor
          ).RequirePermissions(BookStorePermissions.Authors.Default)
      )
 
- //.AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
- //    new ApplicationMenuItem(
- //        "BooksStore.Authors",
- //        l["Authors"],
- //        url: "/Authors"
- //    ).RequirePermissions(BookStorePermissions.Authors.Default)
- //)
 
  );
 
@@ -81,7 +74,7 @@ public class BookStoreMenuContributor : IMenuContributor
             new ApplicationMenuItem(
          "MoviesStore",
          l["Movie Store"],
-         icon: "fa fa-book"
+         icon: "fa fa-film"
      )
      .AddItem(
          new ApplicationMenuItem(

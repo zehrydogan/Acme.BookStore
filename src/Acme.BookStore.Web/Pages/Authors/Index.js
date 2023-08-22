@@ -13,7 +13,7 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(acme.bookStore.authors.author.getList),
             columnDefs: [
                 {
-                    title: l('Actions'),
+                    title: l('ACTIONS'),
                     rowAction: {
                         items:
                             [

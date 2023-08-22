@@ -19,14 +19,16 @@ public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvide
         moviesPermission.AddChild(BookStorePermissions.Movies.Create, L("Permission:Movies.Create"));
         moviesPermission.AddChild(BookStorePermissions.Movies.Edit, L("Permission:Movies.Edit"));
         moviesPermission.AddChild(BookStorePermissions.Movies.Delete, L("Permission:Movies.Delete"));
-        var authorsPermission = bookStoreGroup.AddPermission(
-            BookStorePermissions.Authors.Default, L("Permission:Authors"));
-        authorsPermission.AddChild(
-            BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));
-        authorsPermission.AddChild(
-            BookStorePermissions.Authors.Edit, L("Permission:Authors.Edit"));
-        authorsPermission.AddChild(
-            BookStorePermissions.Authors.Delete, L("Permission:Authors.Delete"));
+
+        var authorsPermission = bookStoreGroup.AddPermission(BookStorePermissions.Authors.Default, L("Permission:Authors"));
+        authorsPermission.AddChild(BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));
+        authorsPermission.AddChild(BookStorePermissions.Authors.Edit, L("Permission:Authors.Edit"));
+        authorsPermission.AddChild( BookStorePermissions.Authors.Delete, L("Permission:Authors.Delete"));
+
+        var actorsPermission = bookStoreGroup.AddPermission(BookStorePermissions.Actors.Default, L("Permission:Actors"));
+        actorsPermission.AddChild(BookStorePermissions.Actors.Create, L("Permission:Actors.Create"));
+        actorsPermission.AddChild(BookStorePermissions.Actors.Edit, L("Permission:Actors.Edit"));
+        actorsPermission.AddChild(BookStorePermissions.Actors.Delete, L("Permission:Actors.Delete"));
 
     }
 

@@ -1,5 +1,4 @@
 ﻿using Acme.BookStore.Authors;
-using Acme.BookStore.Authors;
 using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 using Acme.BookStore.Actors;

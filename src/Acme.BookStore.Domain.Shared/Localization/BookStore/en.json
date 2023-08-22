@@ -62,9 +62,13 @@
     "Enum:MovieType.11": "Thriller",
     "MovieDeletionConfirmationMessage": "Are you sure to delete the movie '{0}'?",
     "Permission:Movies": "Movie Management",
-    "Permission:Movie.Create": "Creating new movies",
+    "Permission:Movies.Create": "Creating new movies",
     "Permission:Movies.Edit": "Editing the movies",
-    "Permission:Movies.Delete": "Deleting the movies"
+    "Permission:Movies.Delete": "Deleting the movies",
+    "Permission:Actors": "Actor Management",
+    "Permission:Actors.Create": "Creating new actors",
+    "Permission:Actors.Edit": "Editing the actors",
+    "Permission:Actors.Delete": "Deleting the actors"
 
 
 
