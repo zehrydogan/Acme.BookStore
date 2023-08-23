@@ -15,5 +15,5 @@ public class Movie : AuditedAggregateRoot<Guid>
 
     //public Guid ActorId { get; set; }
 
-
+    public Guid MovieActorId { get; set; }
 }

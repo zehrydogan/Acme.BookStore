@@ -56,6 +56,10 @@ public class EditModalModel : BookStorePageModel
         //[DisplayName("Actor")]
         //public Guid ActorId { get; set; }
 
+        [SelectItems(nameof(Actors))]
+        [DisplayName("Actor")]
+        public Guid MovieActorId { get; set; }
+
         [Required]
         [StringLength(128)]
         public string Name { get; set; }

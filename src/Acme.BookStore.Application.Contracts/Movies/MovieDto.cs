@@ -7,8 +7,9 @@ namespace Acme.BookStore.Movies
 {
     public class MovieDto : AuditedEntityDto<Guid>
     {
-       // public Guid ActorId { get; set; }
+        // public Guid ActorId { get; set; }
 
+        public Guid MovieActorId { get; set; }
         public string ActorName { get; set; }
 
         public string Name { get; set; }
