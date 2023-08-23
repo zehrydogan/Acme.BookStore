@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.Actors;
+using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
@@ -14,12 +16,12 @@ using Volo.Abp.Domain.Repositories;
 namespace Acme.BookStore.Movies
 {
     [Authorize(BookStorePermissions.Movies.Default)]
-    public class MovieAppService : CrudAppService<Movie, MovieDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMovieDto>, IMovieAppService
+    public class MovieAppService : CrudAppService<MovieActor, MovieDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMovieDto>, IMovieAppService
     {
         private readonly IActorRepository _actorRepository;
 
         public MovieAppService(
-            IRepository<Movie, Guid> repository,
+            IRepository<MovieActor, Guid> repository,
             IActorRepository actorRepository)
             : base(repository)
         {
@@ -33,19 +35,24 @@ namespace Acme.BookStore.Movies
 
         public override async Task<MovieDto> GetAsync(Guid id)
         {
+            //Get the IQueryable<Book> from the repository
             var queryable = await Repository.GetQueryableAsync();
 
-            var query = from movie in queryable
-                        where movie.Id == id
-                        select movie;
+            //Prepare a query to join books and authors
+            var query = from movieactor in queryable
+                        join actor in await _actorRepository.GetQueryableAsync() on movieactor.ActorId equals actor.Id
+                        where movieactor.Id == id
+                        select new { movieactor, actor };
 
+            //Execute the query and get the book with author
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
             if (queryResult == null)
             {
-                throw new EntityNotFoundException(typeof(Movie), id);
+                throw new EntityNotFoundException(typeof(MovieActor), id);
             }
 
-            var movieDto = ObjectMapper.Map<Movie, MovieDto>(queryResult);
+
+            var movieDto = ObjectMapper.Map<MovieActor, MovieDto>(queryResult.movieactor);
             return movieDto;
         }
 
@@ -65,7 +72,7 @@ namespace Acme.BookStore.Movies
 
             var movieDtos = queryResult.Select(x =>
             {
-                var movieDto = ObjectMapper.Map<Movie, MovieDto>(x);
+                var movieDto = ObjectMapper.Map<MovieActor, MovieDto>(x);
                 return movieDto;
             }).ToList();
 
