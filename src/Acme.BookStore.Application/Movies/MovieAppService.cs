@@ -75,7 +75,6 @@ namespace Acme.BookStore.Movies
 
             // Paging
             query = query
-                .OrderBy(NormalizeSorting(input.Sorting))
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
