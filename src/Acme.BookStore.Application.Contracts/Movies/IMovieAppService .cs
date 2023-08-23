@@ -13,8 +13,4 @@ public interface IMovieAppService :
         CreateUpdateMovieDto> //Used to create/update a book
 {
     Task<ListResultDto<ActorLookupDto>> GetActorLookupAsync();
-
 }
-
-
-

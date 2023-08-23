@@ -7,8 +7,5 @@ namespace Acme.BookStore.Movies
     {
         public Guid ActorId { get; set; }
         public Guid MovieId { get; set; }
-
     }
-
-
 }

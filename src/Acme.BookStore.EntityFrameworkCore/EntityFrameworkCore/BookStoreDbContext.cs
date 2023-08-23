@@ -59,6 +59,8 @@ public class BookStoreDbContext :
     public DbSet<Author> Authors { get; set; }
     public DbSet<Actor> Actors { get; set; }
 
+    public DbSet<MovieActor> MovieActors { get; set; }
+
 
 
     // Tenant Management
@@ -113,7 +115,6 @@ public class BookStoreDbContext :
                 .HasMaxLength(AuthorConsts.MaxNameLength);
 
             b.HasIndex(x => x.Name);
-
         });
 
         builder.Entity<Movie>(b =>
@@ -138,10 +139,14 @@ public class BookStoreDbContext :
                 .HasMaxLength(ActorConsts.MaxNameLength);
 
             b.HasIndex(x => x.Name);
+        });
 
+        builder.Entity<MovieActor>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "MovieActors",
+                BookStoreConsts.DbSchema);
 
-
-
+            b.ConfigureByConvention();
         });
     }
 }

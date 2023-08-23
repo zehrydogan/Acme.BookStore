@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Acme.BookStore.Movies
 {
@@ -18,8 +16,5 @@ namespace Acme.BookStore.Movies
 
         [Required]
         public float IMDBRatings { get; set; }
-
-
-     
     }
 }
