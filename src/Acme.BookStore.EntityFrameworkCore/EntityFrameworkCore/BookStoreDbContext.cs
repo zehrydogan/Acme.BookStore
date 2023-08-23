@@ -123,7 +123,7 @@ public class BookStoreDbContext :
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
 
             // ADD THE MAPPING FOR THE RELATION
-            b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
+           // b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
         });
 
         builder.Entity<Actor>(b =>

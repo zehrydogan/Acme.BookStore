@@ -52,9 +52,9 @@ public class EditModalModel : BookStorePageModel
         [HiddenInput]
         public Guid Id { get; set; }
 
-        [SelectItems(nameof(Actors))]
-        [DisplayName("Actor")]
-        public Guid ActorId { get; set; }
+        //[SelectItems(nameof(Actors))]
+        //[DisplayName("Actor")]
+        //public Guid ActorId { get; set; }
 
         [Required]
         [StringLength(128)]

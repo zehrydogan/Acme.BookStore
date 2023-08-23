@@ -19,7 +19,7 @@ public class CreateUpdateMovieDto
     [Required]
     public float IMDBRatings { get; set; }
 
-    public Guid ActorId { get; set; }
+   // public Guid ActorId { get; set; }
 
 }
 

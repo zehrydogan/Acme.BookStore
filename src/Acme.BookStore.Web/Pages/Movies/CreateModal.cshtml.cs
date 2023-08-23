@@ -51,9 +51,9 @@ public class CreateModalModel : BookStorePageModel
         [StringLength(128)]
         public string Name { get; set; }
 
-        [SelectItems(nameof(Actors))]
-        [DisplayName("Actor")]
-        public Guid ActorId { get; set; }
+        //[SelectItems(nameof(Actors))]
+        //[DisplayName("Actor")]
+        //public Guid ActorId { get; set; }
 
         [Required]
         public MovieType Type { get; set; }
