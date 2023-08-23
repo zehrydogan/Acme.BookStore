@@ -147,6 +147,11 @@ public class BookStoreDbContext :
                 BookStoreConsts.DbSchema);
 
             b.ConfigureByConvention();
+
+            b.HasOne<MovieActor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
+            b.HasOne<MovieActor>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
+
+
         });
     }
 }

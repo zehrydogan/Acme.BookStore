@@ -12,5 +12,6 @@ public interface IMovieAppService :
         PagedAndSortedResultRequestDto, //Used for paging/sorting
         CreateUpdateMovieDto> //Used to create/update a book
 {
+    // ADD the NEW METHOD
     Task<ListResultDto<ActorLookupDto>> GetActorLookupAsync();
 }

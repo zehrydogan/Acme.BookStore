@@ -1,12 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Acme.BookStore.Movies
 {
     public class CreateUpdateMovieDto
+
+
+
     {
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
+
+
+        public Guid ActorId { get; set; }
+
+        public Guid MovieId { get; set; }
 
         [Required]
         public string Director { get; set; }
