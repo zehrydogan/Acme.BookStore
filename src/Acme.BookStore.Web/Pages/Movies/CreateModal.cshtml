@@ -13,7 +13,34 @@
         <abp-modal-header title="@L["NewMovie"].Value"></abp-modal-header>
         <abp-modal-body>
             <abp-form-content />
+            <label>Actor</label>
+
+            <select asp-for="Movie.ActorId"
+                    class="auto-complete-select"
+                    data-autocomplete-api-url="/api/app/actor"
+                    data-autocomplete-display-property="name"
+                    data-autocomplete-value-property="id"
+                    data-autocomplete-items-property="items"
+                    data-autocomplete-filter-param-name="filter">
+
+            </select>
+
         </abp-modal-body>
         <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
     </abp-modal>
 </abp-dynamic-form>
+
+
+@*<select asp-for="Book.TagIds"
+        class="auto-complete-select"
+        multiple="multiple"
+        data-autocomplete-api-url="/api/app/tags"
+        data-autocomplete-display-property="name"
+        data-autocomplete-value-property="id"
+        data-autocomplete-items-property="items"
+        data-autocomplete-filter-param-name="filter">
+    @foreach (var tag in SelectedTags)
+    {
+        <option selected value="@tag.Id">@tag.Name</option>
+    }
+</select>*@
