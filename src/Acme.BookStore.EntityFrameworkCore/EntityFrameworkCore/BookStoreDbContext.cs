@@ -122,9 +122,6 @@ public class BookStoreDbContext :
             b.ToTable(BookStoreConsts.DbTablePrefix + "Movies", BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-
-            // ADD THE MAPPING FOR THE RELATION
-            // b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
         });
 
         builder.Entity<Actor>(b =>
@@ -148,10 +145,8 @@ public class BookStoreDbContext :
 
             b.ConfigureByConvention();
 
-            b.HasOne<MovieActor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
-            b.HasOne<MovieActor>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
-
-
+            b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
+            b.HasOne<Movie>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
         });
     }
 }
