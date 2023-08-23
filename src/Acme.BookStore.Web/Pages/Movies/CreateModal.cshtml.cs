@@ -55,11 +55,6 @@ public class CreateModalModel : BookStorePageModel
         //[DisplayName("Actor")]
         //public Guid ActorId { get; set; }
 
-
-
-        [SelectItems(nameof(Actors))]
-        [DisplayName("Actor")]
-        public Guid MovieActorId { get; set; }
         [Required]
         public MovieType Type { get; set; }
 
@@ -68,5 +63,7 @@ public class CreateModalModel : BookStorePageModel
 
         [Required]
         public string Director { get; set; }
+
     }
 }
+

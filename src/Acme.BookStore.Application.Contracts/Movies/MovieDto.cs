@@ -9,8 +9,8 @@ namespace Acme.BookStore.Movies
     {
         // public Guid ActorId { get; set; }
 
-        public Guid MovieActorId { get; set; }
-        public string ActorName { get; set; }
+
+        public string ActorName { get; set; } 
 
         public string Name { get; set; }
 

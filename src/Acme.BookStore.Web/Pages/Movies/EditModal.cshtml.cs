@@ -56,20 +56,21 @@ public class EditModalModel : BookStorePageModel
         //[DisplayName("Actor")]
         //public Guid ActorId { get; set; }
 
-        [SelectItems(nameof(Actors))]
-        [DisplayName("Actor")]
-        public Guid MovieActorId { get; set; }
+
 
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
 
         [Required]
-        public MovieType Type { get; set; } 
+        public MovieType Type { get; set; }
 
         [Required]
-        public float IMDBRatings { get; set; } 
-      [Required]
+        public float IMDBRatings { get; set; }
+        [Required]
         public string Director { get; set; }
+
     }
 }
+
+
