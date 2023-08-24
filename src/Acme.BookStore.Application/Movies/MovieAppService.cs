@@ -4,8 +4,6 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.Actors;
-using Acme.BookStore.Authors;
-using Acme.BookStore.Books;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp.Application.Dtos;
@@ -16,16 +14,19 @@ using Volo.Abp.Domain.Repositories;
 namespace Acme.BookStore.Movies
 {
     [Authorize(BookStorePermissions.Movies.Default)]
-    public class MovieAppService : CrudAppService<MovieActor, MovieDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMovieDto>, IMovieAppService
+    public class MovieAppService : CrudAppService<Movie, MovieDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateMovieDto>, IMovieAppService
     {
         private readonly IActorRepository _actorRepository;
+        private readonly IRepository<MovieActor, Guid> _movieActorRepository;
 
         public MovieAppService(
-            IRepository<MovieActor, Guid> repository,
+            IRepository<Movie, Guid> repository,
+            IRepository<MovieActor, Guid> movieActorRepository,
             IActorRepository actorRepository)
             : base(repository)
         {
             _actorRepository = actorRepository;
+            _movieActorRepository = movieActorRepository;
             GetPolicyName = BookStorePermissions.Movies.Default;
             GetListPolicyName = BookStorePermissions.Movies.Default;
             CreatePolicyName = BookStorePermissions.Movies.Create;
@@ -35,61 +36,50 @@ namespace Acme.BookStore.Movies
 
         public override async Task<MovieDto> GetAsync(Guid id)
         {
-            // Get the IQueryable<MovieActor> from the repository
             var queryable = await Repository.GetQueryableAsync();
+            var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
 
-            // Prepare a query to join movieactors, actors, and movies
-            var query = from movieactor in queryable
-                        join actor in await _actorRepository.GetQueryableAsync() on movieactor.ActorId equals actor.Id
-                        join movie in await _actorRepository.GetQueryableAsync() on movieactor.MovieId equals movie.Id
-                        where movieactor.Id == id
-                        select new { movieactor, actor, movie };
 
-            // Execute the query and get the movieactor with actor and movie
+            var query = from movie in queryable
+                        where movie.Id == id
+                        select movie;
+
+            var movieActorQuery = from movieactor in queryableMovieActor
+                                  where movieactor.MovieId == id
+                                  select movieactor;
+
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
+            var movieActorQueryResult = await AsyncExecuter.ToListAsync(movieActorQuery);
+
             if (queryResult == null)
             {
-                throw new EntityNotFoundException(typeof(MovieActor), id);
+                throw new EntityNotFoundException(typeof(Movie), id);
             }
 
-            // Map the query result to a MovieDto object
-            var movieDto = ObjectMapper.Map<MovieActor, MovieDto>(queryResult.movieactor);
-
-            // You can also set MovieId and ActorId
-            movieDto.MovieId = queryResult.movie.Id;
-            movieDto.ActorId = queryResult.actor.Id;
-
+            var movieDto = ObjectMapper.Map<Movie, MovieDto>(queryResult);
             return movieDto;
         }
 
-
         public override async Task<PagedResultDto<MovieDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
-            // Get the IQueryable<MovieActor> from the repository
             var queryable = await Repository.GetQueryableAsync();
 
-            // Prepare a query to join movieactors and actors
-            var query = from movieactor in queryable
-                        join actor in await _actorRepository.GetQueryableAsync() on movieactor.ActorId equals actor.Id
-                        select new { movieactor, actor };
+            var query = from movie in queryable
+                        select movie;
 
-            // Paging
             query = query
+                .OrderBy(NormalizeSorting(input.Sorting))
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
-            // Execute the query and get a list
             var queryResult = await AsyncExecuter.ToListAsync(query);
 
-            // Convert the query result to a list of MovieDto objects
             var movieDtos = queryResult.Select(x =>
             {
-                var movieDto = ObjectMapper.Map<MovieActor, MovieDto>(x.movieactor);
-                movieDto.ActorId = x.actor.Id; // Set ActorId here
+                var movieDto = ObjectMapper.Map<Movie, MovieDto>(x);
                 return movieDto;
             }).ToList();
 
-            // Get the total count with another query
             var totalCount = await Repository.GetCountAsync();
 
             return new PagedResultDto<MovieDto>(
@@ -111,11 +101,10 @@ namespace Acme.BookStore.Movies
         {
             if (sorting.IsNullOrEmpty())
             {
-                return $"movieactor.{nameof(MovieActor.Id)}";
+                return $"{nameof(Movie.Name)}";
             }
 
-            // You might need to adjust the sorting logic based on your needs
-            return $"movieactor.{sorting}";
+            return $"{sorting}";
         }
     }
 }
