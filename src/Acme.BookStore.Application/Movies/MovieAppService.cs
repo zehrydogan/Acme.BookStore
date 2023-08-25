@@ -61,7 +61,7 @@ namespace Acme.BookStore.Movies
 
 
             var actorQuery = from actor in queryableActor
-                             where  movieActorQueryResult.Select(ma => ma.ActorId).Contains(actor.Id)
+                             where movieActorQueryResult.Select(ma => ma.ActorId).Contains(actor.Id)
                              select actor;
 
             var actorQueryResult = await AsyncExecuter.ToListAsync(actorQuery);
@@ -77,6 +77,9 @@ namespace Acme.BookStore.Movies
         public override async Task<PagedResultDto<MovieDto>> GetListAsync(PagedAndSortedResultRequestDto input)
         {
             var queryable = await Repository.GetQueryableAsync();
+            var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
+            var queryableActor = await _actorRepository.GetQueryableAsync();
+
 
             var query = from movie in queryable
                         select movie;
@@ -94,6 +97,23 @@ namespace Acme.BookStore.Movies
                 return movieDto;
             }).ToList();
 
+            foreach (var movieDto in movieDtos)
+            {
+
+                var movieActorQuery = from movieactor in queryableMovieActor
+                                      where movieactor.MovieId == movieDto.Id
+                                      select movieactor;
+                var movieActorQueryResult = await AsyncExecuter.ToListAsync(movieActorQuery);
+
+                var actorQuery = from actor in queryableActor
+                                 where movieActorQueryResult.Select(ma => ma.ActorId).Contains(actor.Id)
+                                 select actor;
+
+                var actorQueryResult = await AsyncExecuter.ToListAsync(actorQuery);
+
+                movieDto.Actors = actorQueryResult.Select(ObjectMapper.Map<Actor, ActorDto>).ToList();
+            }
+
             var totalCount = await Repository.GetCountAsync();
 
             return new PagedResultDto<MovieDto>(
@@ -101,6 +121,8 @@ namespace Acme.BookStore.Movies
                 movieDtos
             );
         }
+
+
 
         public async Task<ListResultDto<ActorLookupDto>> GetActorLookupAsync()
         {
