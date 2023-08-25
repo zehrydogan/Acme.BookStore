@@ -10,6 +10,8 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.FeatureManagement.JsonConverters;
+using Volo.Abp.ObjectMapping;
 
 namespace Acme.BookStore.Movies
 {
@@ -38,7 +40,7 @@ namespace Acme.BookStore.Movies
         {
             var queryable = await Repository.GetQueryableAsync();
             var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
-
+            var queryableActor = await _actorRepository.GetQueryableAsync();
 
             var query = from movie in queryable
                         where movie.Id == id
@@ -49,14 +51,26 @@ namespace Acme.BookStore.Movies
                                   select movieactor;
 
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
-            var movieActorQueryResult = await AsyncExecuter.ToListAsync(movieActorQuery);
 
             if (queryResult == null)
             {
                 throw new EntityNotFoundException(typeof(Movie), id);
             }
 
+            var movieActorQueryResult = await AsyncExecuter.ToListAsync(movieActorQuery);
+
+
+            var actorQuery = from actor in queryableActor
+                             where  movieActorQueryResult.Select(ma => ma.ActorId).Contains(actor.Id)
+                             select actor;
+
+            var actorQueryResult = await AsyncExecuter.ToListAsync(actorQuery);
+
             var movieDto = ObjectMapper.Map<Movie, MovieDto>(queryResult);
+            var actorDtoList = actorQueryResult.Select(ObjectMapper.Map<Actor, ActorDto>).ToList();
+            movieDto.Actors = actorDtoList;
+
+
             return movieDto;
         }
 

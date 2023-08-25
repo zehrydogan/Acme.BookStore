@@ -12,9 +12,6 @@ namespace Acme.BookStore.Movies
         [StringLength(128)]
         public string Name { get; set; }
 
-
-        public Guid ActorId { get; set; }
-
         public Guid MovieId { get; set; }
 
         [Required]

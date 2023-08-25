@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Acme.BookStore.Actors;
+using System;
+using System.Collections.Generic;
 using Volo.Abp.Domain.Entities;
 
 namespace Acme.BookStore.Movies
@@ -7,5 +9,8 @@ namespace Acme.BookStore.Movies
     {
         public Guid ActorId { get; set; }
         public Guid MovieId { get; set; }
+
     }
+
+   
 }

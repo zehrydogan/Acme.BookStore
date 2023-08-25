@@ -66,7 +66,7 @@ public class BookStoreDbContext :
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
+   
     #endregion
 
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
