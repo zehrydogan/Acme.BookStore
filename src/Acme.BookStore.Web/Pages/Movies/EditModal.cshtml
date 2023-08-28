@@ -14,22 +14,8 @@
         <abp-modal-body>
             <abp-form-content />
             <label>Actor</label>
-@*            <select asp-for="Movie.SelectedActors"
-                    class="auto-complete-select"
-                    data-autocomplete-api-url="/api/app/actor"
-                    data-autocomplete-display-property="name"
-                    data-autocomplete-value-property="id"
-                    data-autocomplete-items-property="items"
-                    data-autocomplete-filter-param-name="filter" multiple>
-                <!-- Önceden seçilmiş aktörleri işaretle -->
-                @foreach (var selectedActor in Model.Movie.SelectedActors)
-                {
-                    <option value="@selectedActor" selected>@selectedActor</option>
-                }
-            </select>*@
-
-
             <select asp-for="Movie.Actors"
+                    asp-items="@Model.Actors"
                     class="auto-complete-select"
                     data-autocomplete-api-url="/api/app/actor"
                     data-autocomplete-display-property="name"
