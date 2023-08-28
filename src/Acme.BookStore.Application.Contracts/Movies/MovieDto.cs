@@ -8,7 +8,6 @@ namespace Acme.BookStore.Movies
 {
     public class MovieDto : AuditedEntityDto<Guid>
     {
-
         public List<ActorDto> Actors { get; set; }
 
         public string Name { get; set; }

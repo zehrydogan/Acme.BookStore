@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
 namespace Acme.BookStore.Movies
 {
     public class CreateUpdateMovieDto
@@ -13,6 +13,10 @@ namespace Acme.BookStore.Movies
         public string Name { get; set; }
 
         public Guid MovieId { get; set; }
+
+        public Guid ActorId { get; set; }
+
+        public List<Guid> Actors { get; set; }
 
         [Required]
         public string Director { get; set; }

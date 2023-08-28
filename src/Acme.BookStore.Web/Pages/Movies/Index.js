@@ -46,8 +46,12 @@ $(function () {
                     data: "name"
                 },
                 {
-                    title: l('Actor'),
-                    data: "actorName"
+                    title: l('Actors'),
+                    data: "actors",
+                    render: function (data) {
+                        var names = data.map((a) => a.name);
+                        return names.join(', ');
+                    }
                 },
                 {
                     title: l('Type'),

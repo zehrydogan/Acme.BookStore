@@ -122,7 +122,66 @@ namespace Acme.BookStore.Movies
             );
         }
 
+        public override async Task<MovieDto> CreateAsync(CreateUpdateMovieDto input)
+        {
+            var movie = await base.CreateAsync(input);
 
+            var movieActors = input.Actors.Select(actorId => new MovieActor
+            {
+                MovieId = movie.Id,
+                ActorId = actorId
+            }).ToList();
+
+            await _movieActorRepository.InsertManyAsync(movieActors);
+
+            return movie;
+        }
+
+        //public override async Task<MovieDto> UpdateAsync( CreateUpdateMovieDto input)
+        //{
+        //    var movie = await base.UpdateAsync( input);
+        //    var movieActors = input.Actors.Select(actorId => new MovieActor
+        //    {
+        //        MovieId = movie.Id,
+        //        ActorId = actorId
+        //    }).ToList();
+
+        //    await _movieActorRepository.InsertManyAsync(movieActors);
+
+        //    return movie;
+
+        //}
+        public override async Task<MovieDto> UpdateAsync(Guid id, CreateUpdateMovieDto input)
+        {
+            var movie = await base.UpdateAsync(id, input);
+
+            var existingMovieActors = await _movieActorRepository.GetListAsync(ma => ma.MovieId == id);
+            var existingActorId = existingMovieActors.Select(ma => ma.ActorId).ToList();
+            var newActorId = input.Actors;
+
+            var actorsToAdd = newActorId.Except(existingActorId).ToList();
+            var actorsToRemove = newActorId.Except(existingActorId).ToList();
+
+            foreach (var actorId in actorsToAdd)
+            {
+                await _movieActorRepository.InsertAsync(new MovieActor
+                {
+                    MovieId = id,
+                    ActorId = actorId
+                });
+            }
+
+            foreach (var actorId in actorsToRemove)
+            {
+                var movieActorToRemove = existingMovieActors.FirstOrDefault(ma => ma.ActorId == actorId);
+                if (movieActorToRemove != null)
+                {
+                    await _movieActorRepository.DeleteAsync(movieActorToRemove);
+                }
+            }
+
+            return movie;
+        }
 
         public async Task<ListResultDto<ActorLookupDto>> GetActorLookupAsync()
         {

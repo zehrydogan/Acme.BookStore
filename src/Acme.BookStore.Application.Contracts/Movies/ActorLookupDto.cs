@@ -7,4 +7,5 @@ namespace Acme.BookStore.Movies;
 public class ActorLookupDto : EntityDto<Guid>
 {
     public string Name { get; set; }
+
 }

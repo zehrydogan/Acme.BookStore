@@ -53,7 +53,7 @@ public class CreateModalModel : BookStorePageModel
         [HiddenInput]
         //[SelectItems(nameof(Actors))]
         //[DisplayName("Actor")]
-        public List<Guid>? ActorId { get; set; }
+        public List<Guid>? Actors { get; set; }
 
         [Required]
         public MovieType Type { get; set; }

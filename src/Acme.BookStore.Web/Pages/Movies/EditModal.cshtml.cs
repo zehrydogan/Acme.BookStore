@@ -28,13 +28,24 @@ public class EditModalModel : BookStorePageModel
     public async Task OnGetAsync(Guid id)
     {
         var movieDto = await _movieAppService.GetAsync(id);
-        Movie = ObjectMapper.Map<MovieDto, EditMovieViewModel>(movieDto);
+
+        Movie = new EditMovieViewModel
+        {
+            Id = movieDto.Id,
+            Name = movieDto.Name,
+            Type = movieDto.Type,
+            IMDBRatings = movieDto.IMDBRatings,
+            Director = movieDto.Director,
+            Actors = movieDto.Actors.Select(actor => actor.Id).ToList()
+        };
 
         var actorLookup = await _movieAppService.GetActorLookupAsync();
         Actors = actorLookup.Items
-            .Select(x => new SelectListItem(x.Name, x.Id.ToString()))
+            .Select(x => new SelectListItem(x.Name, x.Id.ToString(), true))
             .ToList();
     }
+
+
 
 
     public async Task<IActionResult> OnPostAsync()
@@ -50,12 +61,16 @@ public class EditModalModel : BookStorePageModel
     public class EditMovieViewModel
     {
         [HiddenInput]
+        
         public Guid Id { get; set; }
 
         [Required]
         [StringLength(128)]
         public string Name { get; set; }
 
+        [HiddenInput]
+        public List<Guid>? Actors { get; set; }
+        
         [Required]
         public MovieType Type { get; set; }
 
@@ -63,8 +78,5 @@ public class EditModalModel : BookStorePageModel
         public float IMDBRatings { get; set; }
         [Required]
         public string Director { get; set; }
-
     }
 }
-
-
