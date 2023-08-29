@@ -137,20 +137,6 @@ namespace Acme.BookStore.Movies
             return movie;
         }
 
-        //public override async Task<MovieDto> UpdateAsync( CreateUpdateMovieDto input)
-        //{
-        //    var movie = await base.UpdateAsync( input);
-        //    var movieActors = input.Actors.Select(actorId => new MovieActor
-        //    {
-        //        MovieId = movie.Id,
-        //        ActorId = actorId
-        //    }).ToList();
-
-        //    await _movieActorRepository.InsertManyAsync(movieActors);
-
-        //    return movie;
-
-        //}
         public override async Task<MovieDto> UpdateAsync(Guid id, CreateUpdateMovieDto input)
         {
             var movie = await base.UpdateAsync(id, input);
@@ -160,7 +146,7 @@ namespace Acme.BookStore.Movies
             var newActorId = input.Actors;
 
             var actorsToAdd = newActorId.Except(existingActorId).ToList();
-            var actorsToRemove = newActorId.Except(existingActorId).ToList();
+            var actorsToRemove = newActorId.Except(newActorId).ToList();
 
             foreach (var actorId in actorsToAdd)
             {
@@ -173,11 +159,8 @@ namespace Acme.BookStore.Movies
 
             foreach (var actorId in actorsToRemove)
             {
-                var movieActorToRemove = existingMovieActors.FirstOrDefault(ma => ma.ActorId == actorId);
-                if (movieActorToRemove != null)
-                {
-                    await _movieActorRepository.DeleteAsync(movieActorToRemove);
-                }
+
+                await _movieActorRepository.DeleteAsync(actorId);
             }
 
             return movie;
