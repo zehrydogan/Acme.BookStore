@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Acme.BookStore.Actors;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
+using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
@@ -124,6 +125,11 @@ namespace Acme.BookStore.Movies
 
         public override async Task<MovieDto> CreateAsync(CreateUpdateMovieDto input)
         {
+            //if (input.ImdbRating < 1 || input.ImdbRating > 10)
+            //{
+            //    throw new UserFriendlyException("IMDb rating 1 ile 10 arasında olmalıdır.");
+            //}
+
             var movie = await base.CreateAsync(input);
 
             var movieActors = input.Actors.Select(actorId => new MovieActor
@@ -136,6 +142,7 @@ namespace Acme.BookStore.Movies
 
             return movie;
         }
+
 
         public override async Task<MovieDto> UpdateAsync(Guid id, CreateUpdateMovieDto input)
         {

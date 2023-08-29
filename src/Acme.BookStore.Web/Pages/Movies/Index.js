@@ -65,11 +65,11 @@ $(function () {
                     data: "director"
                 },
                 {
-                    title: l('IMDB RATINGS'),
+                    title: l('IMDB RATING'),
                     data: "imdbRatings",
-                    render: function (data) {  // Veri kullanýlarak bir HTML çýktýsý oluþturulur
-                        return (parseFloat(data)/10).toFixed(1);
-                    }
+                    //render: function (data) {  // Veri kullanýlarak bir HTML çýktýsý oluþturulur
+                    //    return (parseFloat(data)/10).toFixed(1);
+                    //}
                 }
             ]
         })
