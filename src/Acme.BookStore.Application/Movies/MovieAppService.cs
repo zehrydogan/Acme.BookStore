@@ -146,7 +146,7 @@ namespace Acme.BookStore.Movies
             var newActorId = input.Actors;
 
             var actorsToAdd = newActorId.Except(existingActorId).ToList();
-            var actorsToRemove = newActorId.Except(newActorId).ToList();
+            var actorsToRemove = existingActorId.Except(newActorId).ToList();
 
             foreach (var actorId in actorsToAdd)
             {
@@ -156,11 +156,13 @@ namespace Acme.BookStore.Movies
                     ActorId = actorId
                 });
             }
-
             foreach (var actorId in actorsToRemove)
             {
-
-                await _movieActorRepository.DeleteAsync(actorId);
+                var movieActorToDelete = existingMovieActors.FirstOrDefault(ma => ma.ActorId == actorId);
+                if (movieActorToDelete != null)
+                {
+                    await _movieActorRepository.DeleteAsync(movieActorToDelete);
+                }
             }
 
             return movie;

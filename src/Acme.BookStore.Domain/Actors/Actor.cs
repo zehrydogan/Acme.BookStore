@@ -10,7 +10,7 @@ public class Actor : FullAuditedAggregateRoot<Guid>
 {
     public string Name { get; private set; }
 
-    public GenderType Gender { get; private set; }
+    public GenderType Gender { get; set; }
 
     public DateTime BirthDate { get; set; }
 

@@ -74,6 +74,8 @@ public class ActorAppService : BookStoreAppService, IActorAppService
             await _actorManager.ChangeNameAsync(actor, input.Name);
         }
 
+        actor.Gender = input.Gender;
+
         actor.BirthDate = input.BirthDate;
 
         await _actorRepository.UpdateAsync(actor);

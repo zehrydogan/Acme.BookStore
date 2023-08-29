@@ -51,8 +51,6 @@ public class CreateModalModel : BookStorePageModel
         public string Name { get; set; }
 
         [HiddenInput]
-        //[SelectItems(nameof(Actors))]
-        //[DisplayName("Actor")]
         public List<Guid>? Actors { get; set; }
 
         [Required]
