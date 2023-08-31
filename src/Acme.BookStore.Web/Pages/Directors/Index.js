@@ -19,22 +19,29 @@ $(function () {
                             [
                                 {
                                     text: l('Edit'),
-                                    visible: abp.auth.isGranted('BookStore.Books.Edit'),
+                                    visible:
+                                        abp.auth.isGranted('BookStore.Directors.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
                                     }
                                 },
                                 {
                                     text: l('Delete'),
-                                    visible: abp.auth.isGranted('BookStore.Books.Delete'),
+                                    visible:
+                                        abp.auth.isGranted('BookStore.Directors.Delete'),
                                     confirmMessage: function (data) {
-                                        return l('BookDeletionConfirmationMessage', data.record.name);
+                                        return l(
+                                            'DirectorDeletionConfirmationMessage',
+                                            data.record.name
+                                        );
                                     },
                                     action: function (data) {
-                                        acme.bookStore.books.book
+                                        acme.bookStore.directors.director
                                             .delete(data.record.id)
                                             .then(function () {
-                                                abp.notify.info(l('SuccessfullyDeleted'));
+                                                abp.notify.info(
+                                                    l('SuccessfullyDeleted')
+                                                );
                                                 dataTable.ajax.reload();
                                             });
                                     }
@@ -47,34 +54,14 @@ $(function () {
                     data: "name"
                 },
                 {
-                    title: l('Gender'),
-                    data: "gender",
-                    render: function (data) {
-                        return l(data);
-                    }
-                },
-                {
-                    title: l('BIRTH DATE'),
+                    title: l('BirthDate'),
                     data: "birthDate",
                     render: function (data) {
-                        return luxon.DateTime.fromISO(data, {
-                            locale: abp.localization.currentCulture.name
-                        }).toLocaleString();
-                    }
-                },
-                {
-                    title: l('Age'),
-                    data: "birthDate",
-                    render: function (data) {
-                        const birthDate = luxon.DateTime.fromISO(data, {
-                            locale: abp.localization.currentCulture.name
-                        });
-                        const today = luxon.DateTime.now();
-                        const age = today.year - birthDate.year - (
-                            (today.month < birthDate.month ||
-                                (today.month === birthDate.month && today.day < birthDate.day)) ? 1 : 0
-                        );
-                        return age;
+                        return luxon
+                            .DateTime
+                            .fromISO(data, {
+                                locale: abp.localization.currentCulture.name
+                            }).toLocaleString();
                     }
                 }
             ]

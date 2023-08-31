@@ -17,7 +17,7 @@ public class EditModalModel : BookStorePageModel
 
     public EditModalModel(IDirectorAppService directorAppService)
     {
-        directorAppService = directorAppService;
+        _directorAppService = directorAppService;
     }
 
     public async Task OnGetAsync(Guid id)

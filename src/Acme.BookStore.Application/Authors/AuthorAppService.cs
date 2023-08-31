@@ -80,10 +80,12 @@ public class AuthorAppService : BookStoreAppService, IAuthorAppService
         await _authorRepository.UpdateAsync(author);
     }
 
-    public Task DeleteAsync(Guid id)
+    [Authorize(BookStorePermissions.Authors.Delete)]
+    public async Task DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        await _authorRepository.DeleteAsync(id);
     }
+
 
     //...SERVICE METHODS WILL COME HERE...
 }
