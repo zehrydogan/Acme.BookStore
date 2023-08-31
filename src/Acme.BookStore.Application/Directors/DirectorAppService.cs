@@ -34,7 +34,7 @@ public class DirectorAppService : BookStoreAppService, IDirectorAppService
             input.Sorting = nameof(Director.Name);
         }
 
-        var adirectors = await _directorRepository.GetListAsync(
+        var directors = await _directorRepository.GetListAsync(
             input.SkipCount,
             input.MaxResultCount,
             input.Sorting,
@@ -64,7 +64,7 @@ public class DirectorAppService : BookStoreAppService, IDirectorAppService
 
         return ObjectMapper.Map<Director, DirectorDto>(director);
     }
-    [Authorize(BookStorePermissions.Directors..Edit)]
+    [Authorize(BookStorePermissions.Directors.Edit)]
     public async Task UpdateAsync(Guid id, CreateUpdateDirectorDto input)
     {
         var director = await _directorRepository.GetAsync(id);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.Actors;
+using Acme.BookStore.Directors;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
 using Volo.Abp;
@@ -21,13 +22,16 @@ namespace Acme.BookStore.Movies
     {
         private readonly IActorRepository _actorRepository;
         private readonly IRepository<MovieActor, Guid> _movieActorRepository;
+        private readonly IDirectorRepository _directorRepository;
 
         public MovieAppService(
             IRepository<Movie, Guid> repository,
             IRepository<MovieActor, Guid> movieActorRepository,
-            IActorRepository actorRepository)
+            IActorRepository actorRepository,
+            IDirectorRepository directorRepository)
             : base(repository)
         {
+            _directorRepository = directorRepository;
             _actorRepository = actorRepository;
             _movieActorRepository = movieActorRepository;
             GetPolicyName = BookStorePermissions.Movies.Default;
@@ -35,13 +39,17 @@ namespace Acme.BookStore.Movies
             CreatePolicyName = BookStorePermissions.Movies.Create;
             UpdatePolicyName = BookStorePermissions.Movies.Edit;
             DeletePolicyName = BookStorePermissions.Movies.Delete;
+          
         }
+
 
         public override async Task<MovieDto> GetAsync(Guid id)
         {
             var queryable = await Repository.GetQueryableAsync();
             var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
             var queryableActor = await _actorRepository.GetQueryableAsync();
+           // var queryableDirector = await _directorRepository.GetQueryableAsync();
+
 
             var query = from movie in queryable
                         where movie.Id == id
@@ -80,6 +88,7 @@ namespace Acme.BookStore.Movies
             var queryable = await Repository.GetQueryableAsync();
             var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
             var queryableActor = await _actorRepository.GetQueryableAsync();
+            var queryableDirector = await _directorRepository.GetQueryableAsync();
 
 
             var query = from movie in queryable
@@ -178,7 +187,14 @@ namespace Acme.BookStore.Movies
                 ObjectMapper.Map<List<Actor>, List<ActorLookupDto>>(actors)
             );
         }
+        public async Task<ListResultDto<DirectorLookupDto>> GetDirectorLookupAsync()
+        {
+            var directors = await _directorRepository.GetListAsync();
 
+            return new ListResultDto<DirectorLookupDto>(
+                ObjectMapper.Map<List<Director>, List<DirectorLookupDto>>(directors)
+            );
+        }
         private static string NormalizeSorting(string sorting)
         {
             if (sorting.IsNullOrEmpty())

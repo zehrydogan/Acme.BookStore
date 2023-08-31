@@ -14,4 +14,6 @@ public interface IMovieAppService :
 {
     // ADD the NEW METHOD
     Task<ListResultDto<ActorLookupDto>> GetActorLookupAsync();
+    Task<ListResultDto<DirectorLookupDto>> GetDirectorLookupAsync();
+
 }
