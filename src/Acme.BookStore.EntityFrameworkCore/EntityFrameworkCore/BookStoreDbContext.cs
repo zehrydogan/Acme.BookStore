@@ -2,6 +2,8 @@
 using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 using Acme.BookStore.Actors;
+using Acme.BookStore.Directors;
+
 
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -58,7 +60,7 @@ public class BookStoreDbContext :
     public DbSet<IdentityUserDelegation> UserDelegations { get; set; }
     public DbSet<Author> Authors { get; set; }
     public DbSet<Actor> Actors { get; set; }
-
+    public DbSet<Director> Directors { get; set; }
     public DbSet<MovieActor> MovieActors { get; set; }
 
 
@@ -134,6 +136,20 @@ public class BookStoreDbContext :
             b.Property(x => x.Name)
                 .IsRequired()
                 .HasMaxLength(ActorConsts.MaxNameLength);
+
+            b.HasIndex(x => x.Name);
+        });
+
+        builder.Entity<Director>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "Directors",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.Property(x => x.Name)
+                .IsRequired()
+                .HasMaxLength(DirectorConsts.MaxNameLength);
 
             b.HasIndex(x => x.Name);
         });

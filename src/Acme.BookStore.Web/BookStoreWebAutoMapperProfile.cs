@@ -2,6 +2,8 @@
 using Acme.BookStore.Books;
 using Acme.BookStore.Actors;
 using Acme.BookStore.Movies;
+using Acme.BookStore.Directors;
+
 
 using AutoMapper;
 
@@ -34,6 +36,11 @@ public class BookStoreWebAutoMapperProfile : Profile
         CreateMap<Pages.Actors.CreateModalModel.CreateActorViewModel, CreateUpdateActorDto>();
         CreateMap<ActorDto, Pages.Actors.EditModalModel.EditActorViewModel>();
         CreateMap<Pages.Actors.EditModalModel.EditActorViewModel, CreateUpdateActorDto>();
+
+        CreateMap<Pages.Directors.CreateModalModel.CreateDirectorViewModel, CreateUpdateDirectorDto>();
+        CreateMap<DirectorDto, Pages.Directors.EditModalModel.EditDirectorViewModel>();
+        CreateMap<Pages.Directors.EditModalModel.EditDirectorViewModel, CreateUpdateDirectorDto>();
+
 
 
     }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Acme.BookStore.Actors;
+namespace Acme.BookStore.Directors;
 public enum GenderType
 
 {
-   Male,
-   Female
+    Male,
+    Female
 }

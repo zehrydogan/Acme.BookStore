@@ -125,11 +125,6 @@ namespace Acme.BookStore.Movies
 
         public override async Task<MovieDto> CreateAsync(CreateUpdateMovieDto input)
         {
-            //if (input.ImdbRating < 1 || input.ImdbRating > 10)
-            //{
-            //    throw new UserFriendlyException("IMDb rating 1 ile 10 arasında olmalıdır.");
-            //}
-
             var movie = await base.CreateAsync(input);
 
             var movieActors = input.Actors.Select(actorId => new MovieActor

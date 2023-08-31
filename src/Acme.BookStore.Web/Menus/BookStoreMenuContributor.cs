@@ -88,6 +88,12 @@ public class BookStoreMenuContributor : IMenuContributor
              l["Actors"],
              url: "/Actors"
          ).RequirePermissions(BookStorePermissions.Actors.Default)
+     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
+         new ApplicationMenuItem(
+             "MoviesStore.Directors",
+             l["Directors"],
+             url: "/Directors"
+         ).RequirePermissions(BookStorePermissions.Directors.Default)
      ));
 
         return Task.CompletedTask;

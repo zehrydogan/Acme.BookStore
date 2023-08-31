@@ -18,6 +18,7 @@ namespace Acme.BookStore.Movies
 
         public List<Guid> Actors { get; set; }
 
+
         [Required]
         public string Director { get; set; }
 
