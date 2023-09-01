@@ -13,7 +13,7 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(acme.bookStore.actors.actor.getList),
             columnDefs: [
                 {
-                    title: l('ACTIONS'),
+                    title: l('Actions'),
                     rowAction: {
                         items:
                             [
@@ -54,7 +54,7 @@ $(function () {
                     }
                 },
                 {
-                    title: l('BIRTH DATE'),
+                    title: l('BirthDate'),
                     data: "birthDate",
                     render: function (data) {
                         return luxon.DateTime.fromISO(data, {

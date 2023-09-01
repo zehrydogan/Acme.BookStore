@@ -45,7 +45,6 @@ public class EditModalModel : BookStorePageModel
         [StringLength(DirectorConsts.MaxNameLength)]
         public string Name { get; set; }
 
-
         [Required]
         public GenderType Gender { get; set; } = GenderType.Male;
 

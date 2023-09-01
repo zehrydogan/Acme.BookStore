@@ -31,6 +31,7 @@ public class EditModalModel : BookStorePageModel
     {
         var movieDto = await _movieAppService.GetAsync(id);
 
+
         Movie = new EditMovieViewModel
         {
             Id = movieDto.Id,
@@ -38,6 +39,7 @@ public class EditModalModel : BookStorePageModel
             Type = movieDto.Type,
             IMDBRatings = movieDto.IMDBRatings,
             Actors = movieDto.Actors.Select(actor => actor.Id).ToList(),
+            DirectorId = movieDto.DirectorId
         };
 
         var actorLookup = await _movieAppService.GetActorLookupAsync();
@@ -45,8 +47,8 @@ public class EditModalModel : BookStorePageModel
             .Select(x => new SelectListItem(x.Name, x.Id.ToString(), true))
             .ToList();
         var directorLookup = await _movieAppService.GetDirectorLookupAsync();
-        Directors = actorLookup.Items
-            .Select(x => new SelectListItem(x.Name, x.Id.ToString(), true))
+        Directors = directorLookup.Items
+            .Select(x => new SelectListItem(x.Name, x.Id.ToString(), x.Id == Movie.DirectorId))
             .ToList();
     }
 

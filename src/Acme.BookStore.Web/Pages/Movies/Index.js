@@ -13,7 +13,7 @@ $(function () {
             ajax: abp.libs.datatables.createAjax(acme.bookStore.movies.movie.getList),
             columnDefs: [
                 {
-                    title: l('ACTIONS'),
+                    title: l('Actions'),
                     rowAction: {
                         items: [
                             {
@@ -61,11 +61,11 @@ $(function () {
                     }
                 },
                 {
-                    title: l('DIRECTOR'),
-                    data: "director"
+                    title: l('Director'),
+                    data: "directorName"
                 },
                 {
-                    title: l('IMDB RATING'),
+                    title: l('IMDBRating'),
                     data: "imdbRatings",
                     //render: function (data) {  // Veri kullanýlarak bir HTML çýktýsý oluþturulur
                     //    return (parseFloat(data)/10).toFixed(1);

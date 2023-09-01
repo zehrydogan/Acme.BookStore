@@ -4,6 +4,8 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.Actors;
+using Acme.BookStore.Authors;
+using Acme.BookStore.Books;
 using Acme.BookStore.Directors;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
@@ -48,23 +50,31 @@ namespace Acme.BookStore.Movies
             var queryable = await Repository.GetQueryableAsync();
             var queryableMovieActor = await _movieActorRepository.GetQueryableAsync();
             var queryableActor = await _actorRepository.GetQueryableAsync();
-           // var queryableDirector = await _directorRepository.GetQueryableAsync();
+            var queryableDirector = await _directorRepository.GetQueryableAsync();
 
 
             var query = from movie in queryable
                         where movie.Id == id
                         select movie;
-
-            var movieActorQuery = from movieactor in queryableMovieActor
-                                  where movieactor.MovieId == id
-                                  select movieactor;
-
             var queryResult = await AsyncExecuter.FirstOrDefaultAsync(query);
 
             if (queryResult == null)
             {
                 throw new EntityNotFoundException(typeof(Movie), id);
             }
+
+            var queryDirector = from movie in queryable
+                        join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
+                        where movie.Id == id
+                        select new { movie, director };
+            var queryDirectorResult = await AsyncExecuter.FirstOrDefaultAsync(queryDirector);
+            if (queryDirectorResult == null)
+            {
+                throw new EntityNotFoundException(typeof(Movie), id);
+            }
+            var movieActorQuery = from movieactor in queryableMovieActor
+                                  where movieactor.MovieId == id
+                                  select movieactor;
 
             var movieActorQueryResult = await AsyncExecuter.ToListAsync(movieActorQuery);
 
@@ -75,7 +85,9 @@ namespace Acme.BookStore.Movies
 
             var actorQueryResult = await AsyncExecuter.ToListAsync(actorQuery);
 
-            var movieDto = ObjectMapper.Map<Movie, MovieDto>(queryResult);
+            var movieDto = ObjectMapper.Map<Movie, MovieDto>(queryDirectorResult.movie);
+            movieDto.DirectorName = queryDirectorResult.director.Name;
+
             var actorDtoList = actorQueryResult.Select(ObjectMapper.Map<Actor, ActorDto>).ToList();
             movieDto.Actors = actorDtoList;
 
@@ -94,16 +106,23 @@ namespace Acme.BookStore.Movies
             var query = from movie in queryable
                         select movie;
 
+            var queryDirector = from movie in queryable
+                        join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
+                        select new { movie, director };
+
             query = query
                 .OrderBy(NormalizeSorting(input.Sorting))
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
 
             var queryResult = await AsyncExecuter.ToListAsync(query);
+            var queryDirectorResult = await AsyncExecuter.ToListAsync(queryDirector);
 
-            var movieDtos = queryResult.Select(x =>
+            var movieDtos = queryDirectorResult.Select(x =>
             {
-                var movieDto = ObjectMapper.Map<Movie, MovieDto>(x);
+                var movieDto = ObjectMapper.Map<Movie, MovieDto>(x.movie);
+                movieDto.DirectorName = x.director.Name;
+
                 return movieDto;
             }).ToList();
 
@@ -152,6 +171,7 @@ namespace Acme.BookStore.Movies
         {
             var movie = await base.UpdateAsync(id, input);
 
+
             var existingMovieActors = await _movieActorRepository.GetListAsync(ma => ma.MovieId == id);
             var existingActorId = existingMovieActors.Select(ma => ma.ActorId).ToList();
             var newActorId = input.Actors;
@@ -175,6 +195,9 @@ namespace Acme.BookStore.Movies
                     await _movieActorRepository.DeleteAsync(movieActorToDelete);
                 }
             }
+
+            movie.DirectorId = input.DirectorId;
+
 
             return movie;
         }

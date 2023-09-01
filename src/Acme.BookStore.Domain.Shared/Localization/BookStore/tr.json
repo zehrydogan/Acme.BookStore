@@ -3,6 +3,25 @@
   "texts": {
     "Menu:Home": "Ana sayfa",
     "Welcome": "Hoşgeldiniz",
-    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz."
+    "LongWelcomeMessage": "Uygulamaya hoşgeldiniz. Bu, ABP framework'ü üzerine bina edilmiş bir başlangıç projesidir. Daha fazla bilgi için abp.io adresini ziyaret edebilirsiniz.",
+    "Name": "İsim",
+    "Movies": "Filmler",
+    "Actors": "Oyuncular",
+    "Directors": "Yönetmenler",
+    "Actions": "İşlemler",
+    "Type": "Tür",
+    "Director": "Yönetmen",
+    "IMDBRating": "IMDB Puanı",
+    "IMDBRatings": "IMDB Puanı",
+    "Welcome to the Application": "Uygulamaya Hoş Geldiniz",
+    "Congratulations,BookStoreissuccesfullyrunning!": "Tebrikler, BookStore başarılı bir şekilde çalışıyor.",
+    "NewMovie": "Yeni Film",
+    "Edit": "Düzenle",
+    "Delete": "Sil"
+
+
+
+
+
   }
 }
