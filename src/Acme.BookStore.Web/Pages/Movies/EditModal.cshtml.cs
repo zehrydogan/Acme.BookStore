@@ -17,6 +17,8 @@ public class EditModalModel : BookStorePageModel
     public EditMovieViewModel Movie { get; set; }
 
     public List<SelectListItem> Actors { get; set; }
+    public List<SelectListItem> Directors { get; set; }
+
 
     private readonly IMovieAppService _movieAppService;
 
@@ -35,12 +37,15 @@ public class EditModalModel : BookStorePageModel
             Name = movieDto.Name,
             Type = movieDto.Type,
             IMDBRatings = movieDto.IMDBRatings,
-            Director = movieDto.Director,
-            Actors = movieDto.Actors.Select(actor => actor.Id).ToList()
+            Actors = movieDto.Actors.Select(actor => actor.Id).ToList(),
         };
 
         var actorLookup = await _movieAppService.GetActorLookupAsync();
         Actors = actorLookup.Items
+            .Select(x => new SelectListItem(x.Name, x.Id.ToString(), true))
+            .ToList();
+        var directorLookup = await _movieAppService.GetDirectorLookupAsync();
+        Directors = actorLookup.Items
             .Select(x => new SelectListItem(x.Name, x.Id.ToString(), true))
             .ToList();
     }
@@ -61,8 +66,12 @@ public class EditModalModel : BookStorePageModel
     public class EditMovieViewModel
     {
         [HiddenInput]
-        
         public Guid Id { get; set; }
+
+        [SelectItems(nameof(Directors))]
+        [DisplayName("Director")]
+        public Guid DirectorId { get; set; }
+
 
         [Required]
         [StringLength(128)]
@@ -70,13 +79,12 @@ public class EditModalModel : BookStorePageModel
 
         [HiddenInput]
         public List<Guid>? Actors { get; set; }
+
         
         [Required]
         public MovieType Type { get; set; }
 
         [Required]
         public float IMDBRatings { get; set; }
-        [Required]
-        public string Director { get; set; }
     }
 }

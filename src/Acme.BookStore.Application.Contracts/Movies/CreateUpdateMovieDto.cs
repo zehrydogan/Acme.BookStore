@@ -15,12 +15,9 @@ namespace Acme.BookStore.Movies
         public Guid MovieId { get; set; }
 
         public Guid ActorId { get; set; }
+        public Guid DirectorId { get; set; }
 
         public List<Guid> Actors { get; set; }
-
-
-        [Required]
-        public string Director { get; set; }
 
         [Required]
         public MovieType Type { get; set; }

@@ -3,8 +3,6 @@ using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 using Acme.BookStore.Actors;
 using Acme.BookStore.Directors;
-
-
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -124,6 +122,8 @@ public class BookStoreDbContext :
             b.ToTable(BookStoreConsts.DbTablePrefix + "Movies", BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            b.HasOne<Director>().WithMany().HasForeignKey(x => x.DirectorId).IsRequired();
+
         });
 
         builder.Entity<Actor>(b =>

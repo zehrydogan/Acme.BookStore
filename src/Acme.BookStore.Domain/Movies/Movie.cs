@@ -8,9 +8,9 @@ public class Movie : AuditedAggregateRoot<Guid>
 {
     public string Name { get; set; }
 
-    public string Director { get; set; }
-
     public MovieType Type { get; set; }
 
     public float IMDBRatings { get; set; }
+    public Guid DirectorId { get; set; }
+
 }
