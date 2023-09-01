@@ -63,7 +63,7 @@ $(function () {
                 {
                     title: l('PublishDate'),
                     data: "publishDate",
-                    dataFormat: "datetime"
+                    dataFormat: "date"
                 },
                 {
                     title: l('Price'),

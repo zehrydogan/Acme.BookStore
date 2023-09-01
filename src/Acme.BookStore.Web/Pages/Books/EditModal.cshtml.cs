@@ -61,7 +61,7 @@ public class EditModalModel : BookStorePageModel
         public string Name { get; set; }
 
         [Required]
-        public BookType Type { get; set; } = BookType.Undefined;
+        public BookType Type { get; set; } = BookType.Adventure;
 
         [Required]
         [DataType(DataType.Date)]
