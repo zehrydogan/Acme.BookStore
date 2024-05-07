@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
 namespace Acme.BookStore.BookComments
 {
-    public interface IBookCommentAppService : IApplicationService
+    public interface IBookCommentAppService : ICrudAppService< //Defines CRUD methods
+        BookCommentDto, //Used to show books
+        Guid, //Primary key of the book entity
+        PagedAndSortedResultRequestDto, //Used for paging/sorting
+        CreateUpdateBookCommentDto> //Used to create/update a book
     {
-
-        Task<BookCommentDto> GetAsync(Guid BookId);
-
-        Task<BookCommentDto> CreateAsync(CreateUpdateBookCommentDto input);
-
-        Task UpdateAsync(Guid BookId, CreateUpdateBookCommentDto input);
-
-        Task DeleteAsync(Guid BookId);
     }
 }

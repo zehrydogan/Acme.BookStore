@@ -1,6 +1,6 @@
-﻿using Acme.BookStore.Books;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
@@ -11,6 +11,7 @@ namespace Acme.BookStore.BookComments
          BookComment, //The Book entity
          BookCommentDto, //Used to show books
          Guid, //Primary key of the book entity
+         PagedAndSortedResultRequestDto,
          CreateUpdateBookCommentDto>, //Used to create/update a book
      IBookCommentAppService //implement the IBookAppService
     {
@@ -18,16 +19,6 @@ namespace Acme.BookStore.BookComments
             : base(repository)
         {
 
-        }
-
-        public Task<BookCommentDto> CreateAsync(CreateUpdateBookCommentDto input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Guid BookId, CreateUpdateBookCommentDto input)
-        {
-            throw new NotImplementedException();
         }
     }
 }

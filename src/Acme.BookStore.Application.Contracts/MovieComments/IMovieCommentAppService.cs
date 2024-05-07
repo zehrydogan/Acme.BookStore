@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
 namespace Acme.BookStore.MovieComments
 {
-    public interface IMovieCommentAppService :IApplicationService
+    public interface IMovieCommentAppService : ICrudAppService< //Defines CRUD methods
+        MovieCommentDto, //Used to show books
+        Guid, //Primary key of the book entity
+        PagedAndSortedResultRequestDto, //Used for paging/sorting
+        CreateUpdateMovieCommentDto> //Used to create/update a book
     {
-        Task<MovieCommentDto> GetAsync(Guid MovieId);
-        Task<MovieCommentDto> CreateAsync(CreateUpdateMovieCommentDto input);
-
-        Task UpdateAsync(Guid MovieId, CreateUpdateMovieCommentDto input);
-
-        Task DeleteAsync(Guid MovieId);
     }
 }

@@ -1,9 +1,4 @@
-﻿using Acme.BookStore.Books;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -15,6 +10,7 @@ namespace Acme.BookStore.MovieComments
            MovieComment, //The Book entity
            MovieCommentDto, //Used to show books
            Guid, //Primary key of the book entity
+           PagedAndSortedResultRequestDto,
            CreateUpdateMovieCommentDto>, //Used to create/update a book
        IMovieCommentAppService //implement the IBookAppService
     {
@@ -22,16 +18,6 @@ namespace Acme.BookStore.MovieComments
             : base(repository)
         {
 
-        }
-
-        public Task<MovieCommentDto> CreateAsync(CreateUpdateMovieCommentDto input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(Guid MovieId, CreateUpdateMovieCommentDto input)
-        {
-            throw new NotImplementedException();
         }
     }
 }
