@@ -5,7 +5,7 @@ using Volo.Abp.Application.Services;
 namespace Acme.BookStore.UserMovies
 {
     public interface IUserMovieAppService : ICrudAppService<
-        UserMovietDto,
+        UserMovieDto,
         Guid,
         PagedAndSortedResultRequestDto,
         CreateUpdateUserMovietDto>

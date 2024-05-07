@@ -42,7 +42,7 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateMovieCommentDto, MovieComment>();
 
         CreateMap<UserBook, UserBookDto>();
-        CreateMap<UserMovie, UserMovietDto>();
+        CreateMap<UserMovie, UserMovieDto>();
 
         CreateMap<CreateUpdateUserBooktDto, UserBook>();
         CreateMap<CreateUpdateUserMovietDto, UserMovie>();
