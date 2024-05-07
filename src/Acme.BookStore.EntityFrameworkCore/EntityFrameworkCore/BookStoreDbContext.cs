@@ -5,6 +5,8 @@ using Acme.BookStore.Actors;
 using Acme.BookStore.Directors;
 using Acme.BookStore.MovieComments;
 using Acme.BookStore.BookComments;
+using Acme.BookStore.UserBooks;
+using Acme.BookStore.UserMovies;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -36,7 +38,7 @@ public class BookStoreDbContext :
     public DbSet<Book> Books { get; set; }
 
     public DbSet<Movie> Movies { get; set; }
-   
+
 
     #region Entities from the modules
 
@@ -63,15 +65,17 @@ public class BookStoreDbContext :
     public DbSet<Actor> Actors { get; set; }
     public DbSet<Director> Directors { get; set; }
     public DbSet<MovieActor> MovieActors { get; set; }
-    public DbSet<MovieComment> MovieComments{ get; set; }
-    public DbSet<BookComment> BookComments{ get; set; }
+    public DbSet<MovieComment> MovieComments { get; set; }
+    public DbSet<BookComment> BookComments { get; set; }
+    public DbSet<UserBook> UserBooks { get; set; }
+    public DbSet<UserMovie> UserMovies { get; set; }
 
 
 
     // Tenant Management
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-   
+
     #endregion
 
     public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options)
@@ -169,7 +173,7 @@ public class BookStoreDbContext :
             b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
             b.HasOne<Movie>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
         });
-        
+
         builder.Entity<MovieComment>(b =>
         {
             b.ToTable(BookStoreConsts.DbTablePrefix + "MovieComments",
@@ -196,6 +200,28 @@ public class BookStoreDbContext :
               .IsRequired()
               .HasMaxLength(BookCommentConsts.MaxNameLength);
 
+        });
+
+        builder.Entity<UserBook>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "UserBooks",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.UserId).IsRequired();
+            b.HasOne<Book>().WithMany().HasForeignKey(x => x.BookId).IsRequired();
+        });
+        
+        builder.Entity<UserMovie>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "UserMovies",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.HasOne<IdentityUser>().WithMany().HasForeignKey(x => x.UserId).IsRequired();
+            b.HasOne<Movie>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
         });
     }
 }

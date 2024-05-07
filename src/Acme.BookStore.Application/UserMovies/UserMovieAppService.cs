@@ -4,18 +4,18 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.BookStore.BookComments
+namespace Acme.BookStore.UserMovies
 {
-    public class UserBookAppService :
+    public class UserMovieAppService :
      CrudAppService<
-         BookComment,
-         BookCommentDto, 
-         Guid, 
+         UserMovie,
+         UserMovieDto,
+         Guid,
          PagedAndSortedResultRequestDto,
-         CreateUpdateBookCommentDto>, 
-     IUserBookAppService 
+         CreateUpdateUserMovietDto>,
+     IUserMovieAppService
     {
-        public UserBookAppService(IRepository<BookComment, Guid> repository)
+        public UserMovieAppService(IRepository<UserMovie, Guid> repository)
             : base(repository)
         {
 

@@ -6,6 +6,8 @@ using Acme.BookStore.Directors;
 using AutoMapper;
 using Acme.BookStore.BookComments;
 using Acme.BookStore.MovieComments;
+using Acme.BookStore.UserBooks;
+using Acme.BookStore.UserMovies;
 
 namespace Acme.BookStore;
 
@@ -38,6 +40,13 @@ public class BookStoreApplicationAutoMapperProfile : Profile
 
         CreateMap<CreateUpdateBookCommentDto, BookComment>();
         CreateMap<CreateUpdateMovieCommentDto, MovieComment>();
+
+        CreateMap<UserBook, UserBookDto>();
+        CreateMap<UserMovie, UserMovietDto>();
+
+        CreateMap<CreateUpdateUserBooktDto, UserBook>();
+        CreateMap<CreateUpdateUserMovietDto, UserMovie>();
+
 
 
 

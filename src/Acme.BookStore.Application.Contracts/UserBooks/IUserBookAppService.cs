@@ -2,13 +2,13 @@
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 
-namespace Acme.BookStore.BookComments
+namespace Acme.BookStore.UserBooks
 {
     public interface IUserBookAppService : ICrudAppService< 
-        BookCommentDto,
+        UserBookDto,
         Guid, 
         PagedAndSortedResultRequestDto,
-        CreateUpdateBookCommentDto> 
+        CreateUpdateUserBooktDto> 
     {
     }
 }

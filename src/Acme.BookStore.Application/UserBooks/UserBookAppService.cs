@@ -4,18 +4,18 @@ using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 
-namespace Acme.BookStore.BookComments
+namespace Acme.BookStore.UserBooks
 {
     public class UserBookAppService :
      CrudAppService<
-         BookComment,
-         BookCommentDto, 
+         UserBook,
+         UserBookDto, 
          Guid, 
          PagedAndSortedResultRequestDto,
-         CreateUpdateBookCommentDto>, 
+         CreateUpdateUserBooktDto>, 
      IUserBookAppService 
     {
-        public UserBookAppService(IRepository<BookComment, Guid> repository)
+        public UserBookAppService(IRepository<UserBook, Guid> repository)
             : base(repository)
         {
 
