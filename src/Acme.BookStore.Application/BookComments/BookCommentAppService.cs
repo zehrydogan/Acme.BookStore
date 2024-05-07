@@ -8,12 +8,12 @@ namespace Acme.BookStore.BookComments
 {
     public class BookCommentAppService :
      CrudAppService<
-         BookComment, //The Book entity
-         BookCommentDto, //Used to show books
-         Guid, //Primary key of the book entity
+         BookComment,
+         BookCommentDto, 
+         Guid, 
          PagedAndSortedResultRequestDto,
-         CreateUpdateBookCommentDto>, //Used to create/update a book
-     IBookCommentAppService //implement the IBookAppService
+         CreateUpdateBookCommentDto>, 
+     IBookCommentAppService 
     {
         public BookCommentAppService(IRepository<BookComment, Guid> repository)
             : base(repository)
