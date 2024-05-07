@@ -41,7 +41,7 @@ namespace Acme.BookStore.Movies
             CreatePolicyName = BookStorePermissions.Movies.Create;
             UpdatePolicyName = BookStorePermissions.Movies.Edit;
             DeletePolicyName = BookStorePermissions.Movies.Delete;
-          
+
         }
 
 
@@ -64,9 +64,9 @@ namespace Acme.BookStore.Movies
             }
 
             var queryDirector = from movie in queryable
-                        join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
-                        where movie.Id == id
-                        select new { movie, director };
+                                join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
+                                where movie.Id == id
+                                select new { movie, director };
             var queryDirectorResult = await AsyncExecuter.FirstOrDefaultAsync(queryDirector);
             if (queryDirectorResult == null)
             {
@@ -107,8 +107,8 @@ namespace Acme.BookStore.Movies
                         select movie;
 
             var queryDirector = from movie in queryable
-                        join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
-                        select new { movie, director };
+                                join director in await _directorRepository.GetQueryableAsync() on movie.DirectorId equals director.Id
+                                select new { movie, director };
 
             query = query
                 .OrderBy(NormalizeSorting(input.Sorting))
@@ -153,6 +153,10 @@ namespace Acme.BookStore.Movies
 
         public override async Task<MovieDto> CreateAsync(CreateUpdateMovieDto input)
         {
+    //        double.TryParse(s, System.Globalization.NumberStyles.Float,
+    //System.Globalization.CultureInfo.InvariantCulture, out f)
+
+
             var movie = await base.CreateAsync(input);
 
             var movieActors = input.Actors.Select(actorId => new MovieActor

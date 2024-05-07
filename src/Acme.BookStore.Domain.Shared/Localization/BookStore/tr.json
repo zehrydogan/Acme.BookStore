@@ -69,7 +69,7 @@
     "Authors": "Yazarlar",
     "NewAuthor": "Yeni Yazar",
     "ShortBio": "Kısa Tanıtım",
-    "TheShortBiofieldisrequired": "TheShortBiofieldisrequired",
+    "TheShortBiofieldisrequired": "Kısa Tanıtımı Doldurmak Zorunludur.",
     "Enum:BookType.0": "Macera",
     "Enum:BookType.1": "Biyografi",
     "Enum:BookType.2": "Distopya",
@@ -77,6 +77,8 @@
     "Enum:BookType.4": "Korku",
     "Enum:BookType.5": "Bilim",
     "Enum:BookType.6": "Bilim Kurgu",
-    "Enum:BookType.7": "Şiir"
+    "Enum:BookType.7": "Şiir",
+    "SuccessfullyDeleted": "Başarıyla Silindi.",
+    "Update": "Düzenleme"
   }
 }

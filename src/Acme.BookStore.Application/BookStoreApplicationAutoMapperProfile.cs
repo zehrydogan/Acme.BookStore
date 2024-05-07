@@ -3,10 +3,9 @@ using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 using Acme.BookStore.Actors;
 using Acme.BookStore.Directors;
-
-
-
 using AutoMapper;
+using Acme.BookStore.BookComments;
+using Acme.BookStore.MovieComments;
 
 namespace Acme.BookStore;
 
@@ -34,6 +33,11 @@ public class BookStoreApplicationAutoMapperProfile : Profile
         CreateMap<CreateUpdateDirectorDto, Director>();
         CreateMap<Director, DirectorLookupDto>();
 
+        CreateMap<BookComment, BookCommentDto>();
+        CreateMap<MovieComment, MovieCommentDto>();
+
+        CreateMap<CreateUpdateBookCommentDto, BookComment>();
+        CreateMap<CreateUpdateMovieCommentDto, MovieComment>();
 
 
 

@@ -31,6 +31,7 @@ public class BookStoreHttpApiModule : AbpModule
     {
         Configure<AbpLocalizationOptions>(options =>
         {
+
             options.Resources
                 .Get<BookStoreResource>()
                 .AddBaseTypes(

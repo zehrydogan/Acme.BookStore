@@ -49,11 +49,12 @@ public class BookStoreDomainModule : AbpModule
             options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
             options.Languages.Add(new LanguageInfo("ru", "ru", "Русский", "ru"));
             options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak", "sk"));
-            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe", "tr"));
             options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
             options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
             options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch", "de"));
             options.Languages.Add(new LanguageInfo("es", "es", "Español"));
+            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe", "tr"));
+
         });
 
         Configure<AbpMultiTenancyOptions>(options =>

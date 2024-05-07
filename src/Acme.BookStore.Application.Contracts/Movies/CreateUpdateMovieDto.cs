@@ -25,6 +25,6 @@ namespace Acme.BookStore.Movies
         [Range(0, 10, ErrorMessage = "IMDb rating 0 ile 10 arasında olmalıdır.")]
         [Required]
 
-        public float ImdbRatings { get; set; }
+        public double? IMDBRatings { get; set; }
     }
 }

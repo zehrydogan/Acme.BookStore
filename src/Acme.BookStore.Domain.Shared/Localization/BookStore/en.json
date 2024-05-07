@@ -40,8 +40,8 @@
     "Permission:Authors.Delete": "Deleting the authors",
     "Menu:Authors": "Authors",
     "Authors": "Authors",
-    "TheShortBiofieldisrequired": "Kısa Tanıtım alanı boş bırakılamaz.",
-
+    "TheShortBiofieldisrequired": "TheShortBiofieldisrequired",
+    "Update":"Update",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
     "NewAuthor": "New author",

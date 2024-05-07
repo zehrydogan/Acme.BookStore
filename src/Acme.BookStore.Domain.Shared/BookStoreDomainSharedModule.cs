@@ -1,4 +1,4 @@
-﻿using Acme.BookStore.Localization;
+using Acme.BookStore.Localization;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -25,7 +25,8 @@ namespace Acme.BookStore;
     typeof(AbpSettingManagementDomainSharedModule),
     typeof(AbpTenantManagementDomainSharedModule)    
     )]
-public class BookStoreDomainSharedModule : AbpModule
+[DependsOn(typeof(AbpLocalizationModule))]
+    public class BookStoreDomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {

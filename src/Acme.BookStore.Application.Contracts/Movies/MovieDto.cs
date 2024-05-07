@@ -1,10 +1,11 @@
-﻿
-using Acme.BookStore.Actors;
+﻿using Acme.BookStore.Actors;
 using Acme.BookStore.Directors;
-
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Volo.Abp.Application.Dtos;
+using System.Diagnostics;
 
 namespace Acme.BookStore.Movies
 {
@@ -19,6 +20,7 @@ namespace Acme.BookStore.Movies
 
         public MovieType Type { get; set; }
 
+        
         public float IMDBRatings { get; set; }
     }
 }

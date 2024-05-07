@@ -3,6 +3,8 @@ using Acme.BookStore.Books;
 using Acme.BookStore.Movies;
 using Acme.BookStore.Actors;
 using Acme.BookStore.Directors;
+using Acme.BookStore.MovieComments;
+using Acme.BookStore.BookComments;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -34,6 +36,7 @@ public class BookStoreDbContext :
     public DbSet<Book> Books { get; set; }
 
     public DbSet<Movie> Movies { get; set; }
+   
 
     #region Entities from the modules
 
@@ -60,6 +63,8 @@ public class BookStoreDbContext :
     public DbSet<Actor> Actors { get; set; }
     public DbSet<Director> Directors { get; set; }
     public DbSet<MovieActor> MovieActors { get; set; }
+    public DbSet<MovieComment> MovieComments{ get; set; }
+    public DbSet<BookComment> BookComments{ get; set; }
 
 
 
@@ -163,6 +168,34 @@ public class BookStoreDbContext :
 
             b.HasOne<Actor>().WithMany().HasForeignKey(x => x.ActorId).IsRequired();
             b.HasOne<Movie>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
+        });
+        
+        builder.Entity<MovieComment>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "MovieComments",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.HasOne<Movie>().WithMany().HasForeignKey(x => x.MovieId).IsRequired();
+            b.Property(x => x.Comment)
+              .IsRequired()
+              .HasMaxLength(MovieCommentConsts.MaxNameLength);
+
+        });
+
+        builder.Entity<BookComment>(b =>
+        {
+            b.ToTable(BookStoreConsts.DbTablePrefix + "BookComments",
+                BookStoreConsts.DbSchema);
+
+            b.ConfigureByConvention();
+
+            b.HasOne<Book>().WithMany().HasForeignKey(x => x.BookId).IsRequired();
+            b.Property(x => x.Comment)
+              .IsRequired()
+              .HasMaxLength(BookCommentConsts.MaxNameLength);
+
         });
     }
 }

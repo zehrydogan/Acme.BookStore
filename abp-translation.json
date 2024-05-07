@@ -1,0 +1,121 @@
+{
+  "ReferenceCulture": "en",
+  "TargetCulture": "tr",
+  "Resources": [
+    {
+      "ResourcePath": "C:\\Users\\Monster\\Desktop\\Acme.BookStore\\src\\Acme.BookStore.Domain.Shared\\Localization\\BookStore",
+      "Texts": [
+        {
+          "LocalizationKey": "Menu:BookStore",
+          "Reference": "Book Store",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:BookStore",
+          "Reference": "Book Store",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books",
+          "Reference": "Book Management",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Create",
+          "Reference": "Creating new books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Edit",
+          "Reference": "Editing the books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Books.Delete",
+          "Reference": "Deleting the books",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "BookStore:00001",
+          "Reference": "There is already an author with the same name: {name}",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Authors",
+          "Reference": "Author Management",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Authors.Create",
+          "Reference": "Creating new authors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Authors.Edit",
+          "Reference": "Editing the authors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Authors.Delete",
+          "Reference": "Deleting the authors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Authors",
+          "Reference": "Authors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:MovieStore",
+          "Reference": "Movie Store",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Menu:Movies",
+          "Reference": "Movies",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Movies",
+          "Reference": "Movie Management",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Movies.Create",
+          "Reference": "Creating new movies",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Movies.Edit",
+          "Reference": "Editing the movies",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Movies.Delete",
+          "Reference": "Deleting the movies",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Actors",
+          "Reference": "Actor Management",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Actors.Create",
+          "Reference": "Creating new actors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Actors.Edit",
+          "Reference": "Editing the actors",
+          "Target": ""
+        },
+        {
+          "LocalizationKey": "Permission:Actors.Delete",
+          "Reference": "Deleting the actors",
+          "Target": ""
+        }
+      ]
+    }
+  ]
+}
