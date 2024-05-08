@@ -6,16 +6,16 @@ using Volo.Abp.Domain.Repositories;
 
 namespace Acme.BookStore.BookComments
 {
-    public class UserBookAppService :
+    public class BookCommentAppService :
      CrudAppService<
          BookComment,
          BookCommentDto, 
          Guid, 
          PagedAndSortedResultRequestDto,
-         CreateUpdateBookCommentDto>, 
-     IUserBookAppService 
+         CreateUpdateBookCommentDto>,
+     IIBookCommentAppService
     {
-        public UserBookAppService(IRepository<BookComment, Guid> repository)
+        public BookCommentAppService(IRepository<BookComment, Guid> repository)
             : base(repository)
         {
 

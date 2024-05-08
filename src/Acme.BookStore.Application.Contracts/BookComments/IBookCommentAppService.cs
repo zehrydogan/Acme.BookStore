@@ -4,7 +4,7 @@ using Volo.Abp.Application.Services;
 
 namespace Acme.BookStore.BookComments
 {
-    public interface IUserBookAppService : ICrudAppService< 
+    public interface IBookCommentAppService : ICrudAppService< 
         BookCommentDto,
         Guid, 
         PagedAndSortedResultRequestDto,
