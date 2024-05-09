@@ -29,7 +29,7 @@ $(function () {
                                     text: l('Comment'),
                                     visible: abp.auth.isGranted('BookStore.Books.Comment'),
                                     action: function (data) {
-                                        Modal.open({ id: data.record.id });
+                                        bookCommentModal.open({ bookId: data.record.id });
                                     }
                                 },
                                 {

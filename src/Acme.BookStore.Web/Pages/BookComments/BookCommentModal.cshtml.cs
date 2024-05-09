@@ -18,35 +18,31 @@ public class BookCommentModalModel : BookStorePageModel
         _bookCommentAppService = bookCommentAppService;
     }
 
-    public async Task OnGetAsync(Guid id)
+    public async Task OnGetAsync(Guid bookId)
     {
-        var bookCommentDto = await _bookCommentAppService.GetAsync(id);
-        BookComment = ObjectMapper.Map<BookCommentDto, BookCommentViewModel>(bookCommentDto);
+        BookComment = new BookCommentViewModel();
+        BookComment.BookId = bookId;
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await _bookCommentAppService.UpdateAsync(
-            BookComment.Id,
-            ObjectMapper.Map<BookCommentViewModel, CreateUpdateBookCommentDto>(BookComment)
-        );
-
+        var bookComment = new CreateUpdateBookCommentDto
+        {
+            Date = DateTime.Now,
+            BookId = BookComment.BookId,
+            Comment = BookComment.Comment
+        };
+        await _bookCommentAppService.CreateAsync(bookComment);
         return NoContent();
     }
 
     public class BookCommentViewModel
     {
         [HiddenInput]
-        public Guid Id { get; set; }
+        public Guid BookId {get;set;}
 
         [Required]
         [StringLength(BookCommentConsts.MaxNameLength)]
         public string Comment { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime PublishDate { get; set; } = DateTime.Now;
-
-
     }
 }
