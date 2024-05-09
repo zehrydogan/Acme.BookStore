@@ -18,35 +18,34 @@ public class MovieCommentModalModel : BookStorePageModel
         _movieCommentAppService = movieCommentAppService;
     }
 
-    public async Task OnGetAsync(Guid id)
+    public async Task OnGetAsync(Guid movieId)
     {
-        var movieCommentDto = await _movieCommentAppService.GetAsync(id);
-        MovieComment = ObjectMapper.Map<MovieCommentDto, MovieCommentViewModel>(movieCommentDto);
+        MovieComment = new MovieCommentViewModel();
+        MovieComment.MovieId = movieId;
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await _movieCommentAppService.UpdateAsync(
-            MovieComment.Id,
-            ObjectMapper.Map<MovieCommentViewModel, CreateUpdateMovieCommentDto>(MovieComment)
-        );
-
+        var movieComment = new CreateUpdateMovieCommentDto
+        {
+            Date = DateTime.Now,
+            MovieId = MovieComment.MovieId,
+            Comment = MovieComment.Comment
+        };
+        await _movieCommentAppService.CreateAsync(movieComment);
         return NoContent();
     }
 
     public class MovieCommentViewModel
     {
+
         [HiddenInput]
-        public Guid Id { get; set; }
+        public Guid MovieId { get; set; }
 
         [Required]
         [StringLength(MovieCommentConsts.MaxNameLength)]
+
         public string Comment { get; set; }
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime PublishDate { get; set; } = DateTime.Now;
-
 
     }
 }

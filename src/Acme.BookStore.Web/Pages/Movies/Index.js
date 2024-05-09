@@ -2,6 +2,7 @@ $(function () {
     var l = abp.localization.getResource('BookStore');
     var createModal = new abp.ModalManager(abp.appPath + 'Movies/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Movies/EditModal');
+    var movieCommentModal = new abp.ModalManager(abp.appPath + 'MovieComments/MovieCommentModal');
 
     var dataTable = $('#MoviesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -23,6 +24,28 @@ $(function () {
                                     editModal.open({ id: data.record.id });
                                 }
                             },
+                            {
+                                text: l('Comment'),
+                                visible: abp.auth.isGranted('BookStore.Movies.Comment'),
+                                action: function (data) {
+                                    movieCommentModal.open({ movieId: data.record.id });
+                                }
+                            },
+
+                            {
+                                text: l('AddToWatchList'),
+                                visible: abp.auth.isGranted('BookStore.Movies.Comment'),
+                                action: function (data) {
+                                    debugger
+                                    acme.bookStore.userMovies.userMovie
+                                        .create(data.record.id)
+                                        .then(function () {
+                                            abp.notify.info(l('SuccessfullyAdded'));
+                                            dataTable.ajax.reload();
+                                        });
+                                }
+                            },
+
                             {
                                 text: l('Delete'),
                                 visible: abp.auth.isGranted('BookStore.Movies.Delete'),
