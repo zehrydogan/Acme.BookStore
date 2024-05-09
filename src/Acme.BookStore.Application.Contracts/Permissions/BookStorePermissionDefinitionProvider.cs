@@ -14,11 +14,13 @@ public class BookStorePermissionDefinitionProvider : PermissionDefinitionProvide
         booksPermission.AddChild(BookStorePermissions.Books.Create, L("Permission:Books.Create"));
         booksPermission.AddChild(BookStorePermissions.Books.Edit, L("Permission:Books.Edit"));
         booksPermission.AddChild(BookStorePermissions.Books.Delete, L("Permission:Books.Delete"));
+        booksPermission.AddChild(BookStorePermissions.Books.Comment, L("Permission:Books.Comment"));
 
         var moviesPermission = bookStoreGroup.AddPermission(BookStorePermissions.Movies.Default, L("Permission:Movies"));
         moviesPermission.AddChild(BookStorePermissions.Movies.Create, L("Permission:Movies.Create"));
         moviesPermission.AddChild(BookStorePermissions.Movies.Edit, L("Permission:Movies.Edit"));
         moviesPermission.AddChild(BookStorePermissions.Movies.Delete, L("Permission:Movies.Delete"));
+        moviesPermission.AddChild(BookStorePermissions.Movies.Comment, L("Permission:Movies.Comment"));
 
         var authorsPermission = bookStoreGroup.AddPermission(BookStorePermissions.Authors.Default, L("Permission:Authors"));
         authorsPermission.AddChild(BookStorePermissions.Authors.Create, L("Permission:Authors.Create"));

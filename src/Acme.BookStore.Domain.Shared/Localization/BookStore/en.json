@@ -80,6 +80,7 @@
     "Female": "Female",
     "Enum:GenderType.0": "Male",
     "Enum:GenderType.1": "Female",
-    "Age": "Age"
+    "Age": "Age",
+    "Comment" :"Comment"
   }
 }

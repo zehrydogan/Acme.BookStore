@@ -10,6 +10,7 @@ public static class BookStorePermissions
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
+        public const string Comment = Default + ".Comment";
     }
     public static class Movies
     {
@@ -17,6 +18,8 @@ public static class BookStorePermissions
         public const string Create = Default + ".Create";
         public const string Edit = Default + ".Edit";
         public const string Delete = Default + ".Delete";
+        public const string Comment = Default + ".Comment";
+
     }
     // *** ADDED a NEW NESTED CLASS ***
     public static class Authors

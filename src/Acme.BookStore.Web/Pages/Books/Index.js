@@ -2,6 +2,7 @@ $(function () {
     var l = abp.localization.getResource('BookStore');
     var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Books/EditModal');
+    var bookCommentModal = new abp.ModalManager(abp.appPath + 'BookComments/BookCommentModal')
 
     var dataTable = $('#BooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -22,6 +23,13 @@ $(function () {
                                     visible: abp.auth.isGranted('BookStore.Books.Edit'),
                                     action: function (data) {
                                         editModal.open({ id: data.record.id });
+                                    }
+                                },
+                                {
+                                    text: l('Comment'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Comment'),
+                                    action: function (data) {
+                                        Modal.open({ id: data.record.id });
                                     }
                                 },
                                 {

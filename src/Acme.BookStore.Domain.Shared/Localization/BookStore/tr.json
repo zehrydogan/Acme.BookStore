@@ -79,6 +79,7 @@
     "Enum:BookType.6": "Bilim Kurgu",
     "Enum:BookType.7": "Şiir",
     "SuccessfullyDeleted": "Başarıyla Silindi.",
-    "Update": "Düzenleme"
+    "Update": "Düzenleme",
+    "Comment": "Yorum"
   }
 }
