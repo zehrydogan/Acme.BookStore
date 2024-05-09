@@ -41,7 +41,7 @@
     "Menu:Authors": "Authors",
     "Authors": "Authors",
     "TheShortBiofieldisrequired": "TheShortBiofieldisrequired",
-    "Update":"Update",
+    "Update": "Update",
     "AuthorDeletionConfirmationMessage": "Are you sure to delete the author '{0}'?",
     "BirthDate": "Birth date",
     "NewAuthor": "New author",
@@ -81,6 +81,8 @@
     "Enum:GenderType.0": "Male",
     "Enum:GenderType.1": "Female",
     "Age": "Age",
-    "Comment" :"Comment"
+    "Comment": "Comment",
+    "AddToWatchList": "Add To Watch List",
+    "SuccessfullyAdded": "Successfully Added"
   }
 }

@@ -80,6 +80,8 @@
     "Enum:BookType.7": "Şiir",
     "SuccessfullyDeleted": "Başarıyla Silindi.",
     "Update": "Düzenleme",
-    "Comment": "Yorum"
+    "Comment": "Yorum",
+    "AddToWatchList": "İzlenenler Listesine Ekle",
+    "SuccessfullyAdded": "Başarıyla Eklendi"
   }
 }

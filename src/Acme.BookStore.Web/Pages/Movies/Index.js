@@ -31,21 +31,19 @@ $(function () {
                                     movieCommentModal.open({ movieId: data.record.id });
                                 }
                             },
-
                             {
                                 text: l('AddToWatchList'),
                                 visible: abp.auth.isGranted('BookStore.Movies.Comment'),
                                 action: function (data) {
                                     debugger
                                     acme.bookStore.userMovies.userMovie
-                                        .create(data.record.id)
+                                        .create({movieId: data.record.id, userId: abp.currentUser.id})
                                         .then(function () {
                                             abp.notify.info(l('SuccessfullyAdded'));
                                             dataTable.ajax.reload();
                                         });
                                 }
                             },
-
                             {
                                 text: l('Delete'),
                                 visible: abp.auth.isGranted('BookStore.Movies.Delete'),
