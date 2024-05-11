@@ -3,6 +3,7 @@ $(function () {
     var createModal = new abp.ModalManager(abp.appPath + 'Books/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Books/EditModal');
     var bookCommentModal = new abp.ModalManager(abp.appPath + 'BookComments/BookCommentModal')
+    var viewCommentModal = new abp.ModalManager(abp.appPath + 'Books/ViewCommentModal')
 
     var dataTable = $('#BooksTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -32,7 +33,13 @@ $(function () {
                                         bookCommentModal.open({ bookId: data.record.id });
                                     }
                                 },
-
+                                {
+                                    text: l('ViewComments'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Comment'),
+                                    action: function (data) {
+                                        viewCommentModal.open({ bookId: data.record.id });
+                                    }
+                                },
                                 {
                                     text: l('AddToReadList'),
                                     visible: abp.auth.isGranted('BookStore.Books.Comment'),

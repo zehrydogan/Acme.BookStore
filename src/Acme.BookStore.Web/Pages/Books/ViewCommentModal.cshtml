@@ -1,0 +1,15 @@
+﻿@page
+@using Acme.BookStore.Localization
+@using Acme.BookStore.Web.Pages.Books
+@using Microsoft.Extensions.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model ViewCommentModalModel
+@inject IStringLocalizer<BookStoreResource> L
+@{
+    Layout = null;
+}
+<abp-modal><abp-modal-header title="Product Information"></abp-modal-header>
+    <abp-modal-body><h3>Model.ProductName</h3><div>
+        </div><p>Model.ProductDescription       
+            </p><p><small><i>Reference: https://acme.com/catalog/</i></small></p>
+            </abp-modal-body><abp-modal-footer buttons="Close"></abp-modal-footer></abp-modal>
