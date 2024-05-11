@@ -10,6 +10,8 @@ namespace Acme.BookStore.MovieComments
         public Guid MovieId { get; set; }
         public string Comment { get; set; }
         public DateTime Date { get; set; }
+        public int Rate { get; set; }
+
     }
 }
 

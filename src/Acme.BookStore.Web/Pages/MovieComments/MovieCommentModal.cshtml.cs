@@ -30,7 +30,8 @@ public class MovieCommentModalModel : BookStorePageModel
         {
             Date = DateTime.Now,
             MovieId = MovieComment.MovieId,
-            Comment = MovieComment.Comment
+            Comment = MovieComment.Comment,
+            Rate = MovieComment.Rate
         };
         await _movieCommentAppService.CreateAsync(movieComment);
         return NoContent();
@@ -46,6 +47,10 @@ public class MovieCommentModalModel : BookStorePageModel
         [StringLength(MovieCommentConsts.MaxNameLength)]
 
         public string Comment { get; set; }
+        public int Rate { get; set; }
+
+
+
 
     }
 }

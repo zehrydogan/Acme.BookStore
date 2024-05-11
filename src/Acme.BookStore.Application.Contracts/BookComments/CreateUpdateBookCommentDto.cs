@@ -17,5 +17,7 @@ namespace Acme.BookStore.BookComments
 
         public Guid BookId { get; set; }
 
+        public int Rate { get; set; }
+
     }
 }

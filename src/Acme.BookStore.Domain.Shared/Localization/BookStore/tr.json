@@ -82,6 +82,9 @@
     "Update": "Düzenleme",
     "Comment": "Yorum",
     "AddToWatchList": "İzlenenler Listesine Ekle",
-    "SuccessfullyAdded": "Başarıyla Eklendi"
+    "SuccessfullyAdded": "Başarıyla Eklendi",
+    "AddToReadList": "Okunanlar Listesine Ekle"
+
+
   }
 }

@@ -32,6 +32,20 @@ $(function () {
                                         bookCommentModal.open({ bookId: data.record.id });
                                     }
                                 },
+
+                                {
+                                    text: l('AddToReadList'),
+                                    visible: abp.auth.isGranted('BookStore.Books.Comment'),
+                                    action: function (data) {
+                                        debugger
+                                        acme.bookStore.userBooks.userBook
+                                            .create({ bookId: data.record.id, userId: abp.currentUser.id })
+                                            .then(function () {
+                                                abp.notify.info(l('SuccessfullyAdded'));
+                                                dataTable.ajax.reload();
+                                            });
+                                    }
+                                },
                                 {
                                     text: l('Delete'),
                                     visible: abp.auth.isGranted('BookStore.Books.Delete'),

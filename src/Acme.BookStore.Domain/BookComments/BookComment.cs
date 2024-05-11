@@ -18,6 +18,8 @@ namespace Acme.BookStore.BookComments
             Date = date;
             BookId = bookId;
         }
+        public int Rate { get; set; }
+
 
     }
 }

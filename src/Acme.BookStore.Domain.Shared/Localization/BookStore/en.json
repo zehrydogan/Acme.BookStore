@@ -83,6 +83,9 @@
     "Age": "Age",
     "Comment": "Comment",
     "AddToWatchList": "Add To Watch List",
-    "SuccessfullyAdded": "Successfully Added"
+    "SuccessfullyAdded": "Successfully Added",
+    "AddToReadList": "Add To Read List"
+
+
   }
 }

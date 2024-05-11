@@ -1,4 +1,5 @@
 ﻿using Acme.BookStore.BookComments;
+using Acme.BookStore.MovieComments;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -30,7 +31,8 @@ public class BookCommentModalModel : BookStorePageModel
         {
             Date = DateTime.Now,
             BookId = BookComment.BookId,
-            Comment = BookComment.Comment
+            Comment = BookComment.Comment,
+            Rate= BookComment.Rate
         };
         await _bookCommentAppService.CreateAsync(bookComment);
         return NoContent();
@@ -44,5 +46,7 @@ public class BookCommentModalModel : BookStorePageModel
         [Required]
         [StringLength(BookCommentConsts.MaxNameLength)]
         public string Comment { get; set; }
+        public int Rate { get; set; }
+
     }
 }
