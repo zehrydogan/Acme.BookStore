@@ -4,60 +4,53 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Acme.BookStore.BookComments;
 using Acme.BookStore.Books;
 using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Volo.Abp.Application.Dtos;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
+using Volo.Abp.AspNetCore.Mvc.UI.Theming;
 
 namespace Acme.BookStore.Web.Pages.Books;
 
 public class ViewCommentModalModel : BookStorePageModel
 {
     [BindProperty]
-    public EditBookViewModel Book { get; set; }
+    public BookCommentViewModel Book { get; set; }
 
     public List<SelectListItem> Authors { get; set; }
 
-    private readonly IBookAppService _bookAppService;
+    private readonly IBookCommentAppService _bookCommentAppService
+        ;
 
-    public ViewCommentModalModel(IBookAppService bookAppService)
+    public ViewCommentModalModel(IBookCommentAppService bookCommentAppService)
     {
-        _bookAppService = bookAppService;
+        _bookCommentAppService = bookCommentAppService;
     }
 
-    public async Task OnGetAsync(Guid id)
+    public async Task OnGetAsync(Guid bookId)
     {
-       
-    }
+        var allComments = await _bookCommentAppService.GetListAsync(new PagedAndSortedResultRequestDto());
+        var comments= allComments.Items.Where(b => b.BookId == bookId).ToList();
 
+    }
     public async Task<IActionResult> OnPostAsync()
     {
        
         return NoContent();
     }
 
-    public class EditBookViewModel
+    public class CommentViewModel
     {
-        [HiddenInput]
         public Guid Id { get; set; }
 
-        [SelectItems(nameof(Authors))]
-        [DisplayName("Author")]
-        public Guid AuthorId { get; set; }
+        public string UserName { get; set; }
 
-        [Required]
-        [StringLength(128)]
-        public string Name { get; set; }
+        public string Comment { get; set; }  
+        
+        public DateTime Date { get; set; }
 
-        [Required]
-        public BookType Type { get; set; } = BookType.Adventure;
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime PublishDate { get; set; } = DateTime.Now;
-
-        [Required]
-        public float Price { get; set; }
     }
 }
