@@ -1,41 +1,50 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.BookComments;
-using Acme.BookStore.Books;
-using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.Application.Dtos;
-using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
-using Volo.Abp.AspNetCore.Mvc.UI.Theming;
+using Volo.Abp.Identity;
 
 namespace Acme.BookStore.Web.Pages.Books;
 
 public class ViewCommentModalModel : BookStorePageModel
 {
-    [BindProperty]
-    public BookCommentViewModel Book { get; set; }
+    private readonly IBookCommentAppService _bookCommentAppService;
+    private readonly IIdentityUserAppService _identityUserAppService;
+    public List<CommentViewModel> Comments { get; set; }
 
-    public List<SelectListItem> Authors { get; set; }
-
-    private readonly IBookCommentAppService _bookCommentAppService
-        ;
-
-    public ViewCommentModalModel(IBookCommentAppService bookCommentAppService)
+    public ViewCommentModalModel(IBookCommentAppService bookCommentAppService, IIdentityUserAppService identityUserAppService)
     {
         _bookCommentAppService = bookCommentAppService;
+        _identityUserAppService = identityUserAppService;
     }
 
     public async Task OnGetAsync(Guid bookId)
     {
         var allComments = await _bookCommentAppService.GetListAsync(new PagedAndSortedResultRequestDto());
         var comments= allComments.Items.Where(b => b.BookId == bookId).ToList();
+        var commentModels = new List<CommentViewModel>();
+        foreach (var comment in comments)
+        {
+            var user = await _identityUserAppService.GetAsync(comment.UserId);
 
+            if (user == null) continue;
+
+            var commentModel = new CommentViewModel
+            {
+                Comment = comment.Comment,
+                UserName = user.Name,
+                Date = comment.Date,
+                Id = comment.Id,
+                Rate = comment.Rate
+            };
+            commentModels.Add(commentModel);
+        }
+        Comments = commentModels;
     }
+
     public async Task<IActionResult> OnPostAsync()
     {
        
@@ -51,6 +60,7 @@ public class ViewCommentModalModel : BookStorePageModel
         public string Comment { get; set; }  
         
         public DateTime Date { get; set; }
+        public int Rate { get; set; }
 
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Volo.Abp.Users;
 
 namespace Acme.BookStore.Web.Pages.BookComments;
 
@@ -13,10 +14,13 @@ public class BookCommentModalModel : BookStorePageModel
     public BookCommentViewModel BookComment { get; set; }
 
     private readonly IBookCommentAppService _bookCommentAppService;
+    private readonly CurrentUser _currentUser;
 
-    public BookCommentModalModel(IBookCommentAppService bookCommentAppService)
+
+    public BookCommentModalModel(IBookCommentAppService bookCommentAppService, CurrentUser currentUser)
     {
         _bookCommentAppService = bookCommentAppService;
+        _currentUser = currentUser;
     }
 
     public async Task OnGetAsync(Guid bookId)
@@ -32,7 +36,8 @@ public class BookCommentModalModel : BookStorePageModel
             Date = DateTime.Now,
             BookId = BookComment.BookId,
             Comment = BookComment.Comment,
-            Rate= BookComment.Rate
+            Rate = BookComment.Rate,
+            UserId = _currentUser.Id.Value
         };
         await _bookCommentAppService.CreateAsync(bookComment);
         return NoContent();

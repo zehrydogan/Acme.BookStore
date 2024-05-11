@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Acme.BookStore.BookComments
 {
@@ -18,6 +16,7 @@ namespace Acme.BookStore.BookComments
         public Guid BookId { get; set; }
 
         public int Rate { get; set; }
+        public Guid UserId { get; set; }
 
     }
 }

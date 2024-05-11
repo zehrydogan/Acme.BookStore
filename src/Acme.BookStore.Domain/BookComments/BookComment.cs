@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
 namespace Acme.BookStore.BookComments
@@ -12,14 +8,15 @@ namespace Acme.BookStore.BookComments
         public Guid BookId { get; set; }
         public string Comment { get; set; }
         public DateTime Date { get; set; }
-        public BookComment(string comment, DateTime date, Guid bookId)
+        public Guid UserId { get; set; }
+        public int Rate { get; set; }
+
+        public BookComment(string comment, DateTime date, Guid bookId, Guid userId)
         {
             Comment = comment;
             Date = date;
             BookId = bookId;
+            UserId = userId;
         }
-        public int Rate { get; set; }
-
-
     }
 }

@@ -11,6 +11,7 @@ namespace Acme.BookStore.BookComments
         public string Comment { get; set; }
         public DateTime Date { get; set; }
         public int Rate { get; set; }
+        public Guid UserId { get; set; }
 
 
     }
