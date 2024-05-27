@@ -106,7 +106,7 @@ public class BookStoreDbContext :
             b.ToTable(BookStoreConsts.DbTablePrefix + "Books", BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Image).IsRequired().HasColumnType("nvarchar(max)");
+            b.Property(x => x.Image).IsRequired().HasMaxLength(4000);
 
             // ADD THE MAPPING FOR THE RELATION
             b.HasOne<Author>().WithMany().HasForeignKey(x => x.AuthorId).IsRequired();
@@ -132,7 +132,7 @@ public class BookStoreDbContext :
             b.ToTable(BookStoreConsts.DbTablePrefix + "Movies", BookStoreConsts.DbSchema);
             b.ConfigureByConvention(); //auto configure for the base class props
             b.Property(x => x.Name).IsRequired().HasMaxLength(128);
-            b.Property(x => x.Image).IsRequired().HasColumnType("nvarchar(max)");
+            b.Property(x => x.Image).IsRequired().HasMaxLength(4000);
             b.HasOne<Director>().WithMany().HasForeignKey(x => x.DirectorId).IsRequired();
 
         });
