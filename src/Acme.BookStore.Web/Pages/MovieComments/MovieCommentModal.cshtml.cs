@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Volo.Abp.Users;
 
 namespace Acme.BookStore.Web.Pages.MovieComments;
 
@@ -12,10 +13,12 @@ public class MovieCommentModalModel : BookStorePageModel
     public MovieCommentViewModel MovieComment { get; set; }
 
     private readonly IMovieCommentAppService _movieCommentAppService;
+        private readonly CurrentUser _currentUser;
 
-    public MovieCommentModalModel(IMovieCommentAppService movieCommentAppService)
+    public MovieCommentModalModel(IMovieCommentAppService movieCommentAppService, CurrentUser currentUser)
     {
         _movieCommentAppService = movieCommentAppService;
+        _currentUser = currentUser;
     }
 
     public async Task OnGetAsync(Guid movieId)
@@ -31,7 +34,9 @@ public class MovieCommentModalModel : BookStorePageModel
             Date = DateTime.Now,
             MovieId = MovieComment.MovieId,
             Comment = MovieComment.Comment,
-            Rate = MovieComment.Rate
+            Rate = MovieComment.Rate,
+            UserId = _currentUser.Id.Value
+
         };
         await _movieCommentAppService.CreateAsync(movieComment);
         return NoContent();

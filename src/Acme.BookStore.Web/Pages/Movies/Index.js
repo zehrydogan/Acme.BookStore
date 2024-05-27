@@ -3,6 +3,7 @@ $(function () {
     var createModal = new abp.ModalManager(abp.appPath + 'Movies/CreateModal');
     var editModal = new abp.ModalManager(abp.appPath + 'Movies/EditModal');
     var movieCommentModal = new abp.ModalManager(abp.appPath + 'MovieComments/MovieCommentModal');
+    var viewCommentModal = new abp.ModalManager(abp.appPath + 'Movies/ViewCommentModal')
 
     var dataTable = $('#MoviesTable').DataTable(
         abp.libs.datatables.normalizeConfiguration({
@@ -29,6 +30,13 @@ $(function () {
                                 visible: abp.auth.isGranted('BookStore.Movies.Comment'),
                                 action: function (data) {
                                     movieCommentModal.open({ movieId: data.record.id });
+                                }
+                            },
+                            {
+                                text: l('ViewComments'),
+                                visible: abp.auth.isGranted('BookStore.Movies.Comment'),
+                                action: function (data) {
+                                    viewCommentModal.open({ movieId: data.record.id });
                                 }
                             },
                             {

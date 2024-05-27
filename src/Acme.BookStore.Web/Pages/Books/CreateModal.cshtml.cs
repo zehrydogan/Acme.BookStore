@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.Books;
 using AutoMapper.Internal.Mappers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Form;
@@ -64,5 +65,9 @@ public class CreateModalModel : BookStorePageModel
 
         [Required]
         public float Price { get; set; }
+
+        [Required]
+        [Display(Name = "File")]
+        public IFormFile File { get; set; }
     }
 }

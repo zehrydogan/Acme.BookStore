@@ -19,5 +19,6 @@ namespace Acme.BookStore.MovieComments
             MovieId = movieId;
         }
         public int Rate { get; set; }
+        public Guid UserId { get; set; }
     }
 }

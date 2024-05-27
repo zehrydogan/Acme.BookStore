@@ -1,5 +1,4 @@
 ﻿using Acme.BookStore.BookComments;
-using Acme.BookStore.MovieComments;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;

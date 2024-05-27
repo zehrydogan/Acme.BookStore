@@ -13,7 +13,7 @@ namespace Acme.BookStore.BookComments
          Guid, 
          PagedAndSortedResultRequestDto,
          CreateUpdateBookCommentDto>,
-     IBookCommentAppService
+         IBookCommentAppService
     {
         public BookCommentAppService(IRepository<BookComment, Guid> repository)
             : base(repository)
