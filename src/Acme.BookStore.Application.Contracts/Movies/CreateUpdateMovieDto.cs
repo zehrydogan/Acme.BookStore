@@ -26,5 +26,6 @@ namespace Acme.BookStore.Movies
         [Required]
 
         public double? IMDBRatings { get; set; }
+        public byte[] ImageContent { get; set; }
     }
 }

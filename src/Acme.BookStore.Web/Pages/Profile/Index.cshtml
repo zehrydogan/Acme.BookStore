@@ -1,0 +1,62 @@
+﻿@page
+@using Acme.BookStore.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Layout
+@using Acme.BookStore.Web.Pages.Profile
+@using Microsoft.Extensions.Localization
+@model IndexModel
+@inject IStringLocalizer<BookStoreResource> L
+@inject IPageLayout PageLayout
+@{
+    PageLayout.Content.MenuItemName = "MoviesStore";
+    PageLayout.Content.Title = "Profile";
+}
+@section scripts
+    {
+    <abp-script src="/Pages/Profile/Index.js" />
+}
+
+<div style="display: flex; justify-content: space-between">
+
+    <div style="padding-left: 10px; padding-right: 10px; width: 30%;">
+        <abp-card>
+            <abp-card-body style="justify-content: center">
+                <h3>@Model._currentUser.Name</h3>
+                <h5>@Model._currentUser.Email</h5>
+                <h5>@Model._currentUser.PhoneNumber</h5>
+            </abp-card-body>
+        </abp-card>
+    </div>
+
+    <div style="width: 70%;">
+        <abp-card>
+            <abp-card-body>
+                <h4>Filmler</h4>
+                <abp-carousel>
+                    @foreach (var movie in Model.Movies)
+                    {
+                        <abp-carousel-item src="data:image/jpeg;base64,@Convert.ToBase64String(movie.ImageContent)" caption-title=@movie.Name></abp-carousel-item>
+                    }
+                </abp-carousel>
+            </abp-card-body>
+        </abp-card>
+
+        <abp-card>
+            <abp-card-body>
+                <h4>Kitaplar</h4>
+                <abp-carousel>
+                    @foreach (var book in Model.Books)
+                    {
+                        <abp-carousel-item src="data:image/jpeg;base64,@Convert.ToBase64String(book.ImageContent)" caption-title=@book.Name></abp-carousel-item>
+                    }
+                </abp-carousel>
+            </abp-card-body>
+        </abp-card>
+    </div>
+
+</div>
+<style>
+    .d-block {
+        width: auto;
+        max-height: 300px;
+    }
+</style>

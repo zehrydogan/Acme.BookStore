@@ -46,18 +46,17 @@ namespace Acme.BookStore.Web.Pages.Movies
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var movie = ObjectMapper.Map<CreateMovieViewModel, CreateUpdateMovieDto>(Movie);
             if (Movie.File != null)
             {
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", Movie.File.FileName);
-                using (var stream = new FileStream(filePath, FileMode.Create))
+                using (var ms = new MemoryStream())
                 {
-                    await Movie.File.CopyToAsync(stream);
+                    Movie.File.CopyTo(ms);
+                    movie.ImageContent = ms.ToArray();
                 }
             }
 
-            await _movieAppService.CreateAsync(
-                ObjectMapper.Map<CreateMovieViewModel, CreateUpdateMovieDto>(Movie)
-            );
+            await _movieAppService.CreateAsync(movie);
             return NoContent();
         }
 

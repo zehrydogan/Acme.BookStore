@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Acme.BookStore.Books;
-using AutoMapper.Internal.Mappers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -40,9 +40,16 @@ public class CreateModalModel : BookStorePageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        await _bookAppService.CreateAsync(
-            ObjectMapper.Map<CreateBookViewModel, CreateUpdateBookDto>(Book)
-            );
+        var book = ObjectMapper.Map<CreateBookViewModel, CreateUpdateBookDto>(Book);
+        if (Book.File != null)
+        {
+            using (var ms = new MemoryStream())
+            {
+                Book.File.CopyTo(ms);
+                book.ImageContent = ms.ToArray();
+            }
+        }
+        await _bookAppService.CreateAsync(book);
         return NoContent();
     }
 

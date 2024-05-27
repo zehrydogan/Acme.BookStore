@@ -22,7 +22,7 @@ namespace Acme.BookStore.Movies
 
         
         public float IMDBRatings { get; set; }
-        public string Image { get; set; }
+        public byte[] ImageContent { get; set; }
 
     }
 }

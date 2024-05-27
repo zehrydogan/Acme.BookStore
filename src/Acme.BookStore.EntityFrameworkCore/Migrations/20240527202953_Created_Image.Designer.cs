@@ -4,6 +4,7 @@ using Acme.BookStore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace Acme.BookStore.Migrations
 {
     [DbContext(typeof(BookStoreDbContext))]
-    partial class BookStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527202953_Created_Image")]
+    partial class CreatedImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,9 +219,10 @@ namespace Acme.BookStore.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<byte[]>("ImageContent")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
@@ -380,9 +384,10 @@ namespace Acme.BookStore.Migrations
                     b.Property<float>("IMDBRatings")
                         .HasColumnType("real");
 
-                    b.Property<byte[]>("ImageContent")
+                    b.Property<string>("Image")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2")
