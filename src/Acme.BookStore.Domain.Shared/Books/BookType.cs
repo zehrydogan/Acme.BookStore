@@ -14,5 +14,6 @@ public enum BookType
     Horror,
     Science,
     ScienceFiction,
-    Poetry
+    Poetry,
+    Novel
 }

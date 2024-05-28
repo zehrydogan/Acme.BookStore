@@ -9,94 +9,102 @@ using Volo.Abp.SettingManagement.Web.Navigation;
 using Volo.Abp.TenantManagement.Web.Navigation;
 using Volo.Abp.UI.Navigation;
 
-namespace Acme.BookStore.Web.Menus;
-
-public class BookStoreMenuContributor : IMenuContributor
+namespace Acme.BookStore.Web.Menus
 {
-    public async Task ConfigureMenuAsync(MenuConfigurationContext context)
+    public class BookStoreMenuContributor : IMenuContributor
     {
-        if (context.Menu.Name == StandardMenus.Main)
+        public async Task ConfigureMenuAsync(MenuConfigurationContext context)
         {
-            await ConfigureMainMenuAsync(context);
-        }
-    }
-
-    private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
-    {
-        var administration = context.Menu.GetAdministration();
-        var l = context.GetLocalizer<BookStoreResource>();
-
-        context.Menu.Items.Insert(
-            0,
-            new ApplicationMenuItem(
-                BookStoreMenus.Home,
-                l["Menu:Home"],
-                "~/",
-                icon: "fas fa-home",
-                order: 0
-            )
-        );
-
-        if (MultiTenancyConsts.IsEnabled)
-        {
-            administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
-        }
-        else
-        {
-            administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
+            if (context.Menu.Name == StandardMenus.Main)
+            {
+                await ConfigureMainMenuAsync(context);
+            }
         }
 
-        administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
-        administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
-        context.Menu.AddItem(
-     new ApplicationMenuItem(
-         "BooksStore",
-         l["Menu:BookStore"],
-         icon: "fa fa-book"
-     ).AddItem(
-         new ApplicationMenuItem(
-             "BooksStore.Books",
-             l["Menu:Books"],
-             url: "/Books"
-         ).RequirePermissions(BookStorePermissions.Books.Default)
-     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
-         new ApplicationMenuItem(
-             "BooksStore.Authors",
-             l["Authors"],
-             url: "/Authors"
-         ).RequirePermissions(BookStorePermissions.Authors.Default)
-     )
+        private Task ConfigureMainMenuAsync(MenuConfigurationContext context)
+        {
+            var administration = context.Menu.GetAdministration();
+            var l = context.GetLocalizer<BookStoreResource>();
 
+            context.Menu.Items.Insert(
+                0,
+                new ApplicationMenuItem(
+                    BookStoreMenus.Home,
+                    l["Menu:Home"],
+                    "~/",
+                    icon: "fas fa-home",
+                    order: 0
+                )
+            );
 
- );
+            if (MultiTenancyConsts.IsEnabled)
+            {
+                administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
+            }
+            else
+            {
+                administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
+            }
 
-        context.Menu.AddItem(
-            new ApplicationMenuItem(
-         "MoviesStore",
-         l["Movie Store"],
-         icon: "fa fa-film"
-     )
-     .AddItem(
-         new ApplicationMenuItem(
-             "MoviesStore.Movies",
-             l["Movies"],
-             url: "/Movies"
-         ).RequirePermissions(BookStorePermissions.Movies.Default)
-     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
-         new ApplicationMenuItem(
-             "MoviesStore.Actors",
-             l["Actors"],
-             url: "/Actors"
-         ).RequirePermissions(BookStorePermissions.Actors.Default)
-     ).AddItem( // ADDED THE NEW "AUTHORS" MENU ITEM UNDER THE "BOOK STORE" MENU
-         new ApplicationMenuItem(
-             "MoviesStore.Directors",
-             l["Directors"],
-             url: "/Directors"
-         ).RequirePermissions(BookStorePermissions.Directors.Default)
-     ));
+            administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
+            administration.SetSubItemOrder(SettingManagementMenuNames.GroupName, 3);
 
-        return Task.CompletedTask;
+            context.Menu.AddItem(
+                new ApplicationMenuItem(
+                    "BooksStore",
+                    l["Menu:BookStore"],
+                    icon: "fa fa-book"
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "BooksStore.Books",
+                        l["Menu:Books"],
+                        url: "/Books"
+                    ).RequirePermissions(BookStorePermissions.Books.Default)
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "BooksStore.Authors",
+                        l["Authors"],
+                        url: "/Authors"
+                    ).RequirePermissions(BookStorePermissions.Authors.Default)
+                )
+            );
+
+            context.Menu.AddItem(
+                new ApplicationMenuItem(
+                    "MoviesStore",
+                    l["Movie Store"],
+                    icon: "fa fa-film"
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "MoviesStore.Movies",
+                        l["Movies"],
+                        url: "/Movies"
+                    ).RequirePermissions(BookStorePermissions.Movies.Default)
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "MoviesStore.Actors",
+                        l["Actors"],
+                        url: "/Actors"
+                    ).RequirePermissions(BookStorePermissions.Actors.Default)
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "MoviesStore.Directors",
+                        l["Directors"],
+                        url: "/Directors"
+                    ).RequirePermissions(BookStorePermissions.Directors.Default)
+                )
+            );
+
+            context.Menu.AddItem(
+                new ApplicationMenuItem(
+                    "Profile",
+                    l["Profile"],
+                    url: "/Profile",
+                    icon: "fas fa-user"
+                )
+            );
+
+            return Task.CompletedTask;
+        }
     }
 }
-
