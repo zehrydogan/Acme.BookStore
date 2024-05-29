@@ -44,6 +44,34 @@
                 </abp-card-body>
             </abp-card>
         </div>
+
+        <div style="width: 26%;">
+            <abp-card class="hoverable-card">
+                <abp-card-body>
+                    <h4>Önerilen Filmler</h4>
+                    <abp-carousel>
+                        @foreach (var movie in Model.RecommendedMovies)
+                        {
+                            <abp-carousel-item src="data:image/jpeg;base64,@Convert.ToBase64String(movie.ImageContent)" caption-title=@movie.Name></abp-carousel-item>
+                        }
+                    </abp-carousel>
+                </abp-card-body>
+            </abp-card>
+        </div>
+
+        <div style="width: 26%;">
+            <abp-card class="hoverable-card">
+                <abp-card-body>
+                    <h4>Önerilen Kitaplar</h4>
+                    <abp-carousel>
+                        @foreach (var book in Model.RecommendedBooks)
+                        {
+                            <abp-carousel-item src="data:image/jpeg;base64,@Convert.ToBase64String(book.ImageContent)" caption-title=@book.Name></abp-carousel-item>
+                        }
+                    </abp-carousel>
+                </abp-card-body>
+            </abp-card>
+        </div>
     </div>
 </div>
 
