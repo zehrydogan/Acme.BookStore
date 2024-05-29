@@ -4,18 +4,13 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
 using Acme.BookStore.Actors;
-using Acme.BookStore.Authors;
-using Acme.BookStore.Books;
 using Acme.BookStore.Directors;
 using Acme.BookStore.Permissions;
 using Microsoft.AspNetCore.Authorization;
-using Volo.Abp;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Repositories;
-using Volo.Abp.FeatureManagement.JsonConverters;
-using Volo.Abp.ObjectMapping;
 
 namespace Acme.BookStore.Movies
 {
