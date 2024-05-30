@@ -31,7 +31,7 @@ $(function () {
                                         return l('ActorDeletionConfirmationMessage', data.record.name);
                                     },
                                     action: function (data) {
-                                        acme.bookStore.books.book
+                                        acme.bookStore.actors.actor
                                             .delete(data.record.id)
                                             .then(function () {
                                                 abp.notify.info(l('SuccessfullyDeleted'));

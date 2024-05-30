@@ -30,11 +30,14 @@ $(function () {
                                     confirmMessage: function (data) {
                                         return l('DirectorDeletionConfirmationMessage', data.record.name);
                                     },
+
                                     action: function (data) {
-                                        acme.bookStore.books.book
+                                        acme.bookStore.directors.director
                                             .delete(data.record.id)
                                             .then(function () {
-                                                abp.notify.info(l('SuccessfullyDeleted'));
+                                                abp.notify.info(
+                                                    l('SuccessfullyDeleted')
+                                                );
                                                 dataTable.ajax.reload();
                                             });
                                     }
